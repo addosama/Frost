@@ -2,3 +2,4 @@
 *.mca
 *.log
 *.gz
+*.lock
