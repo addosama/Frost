@@ -1,1 +1,4 @@
 /run/
+*.mca
+*.log
+*.gz
