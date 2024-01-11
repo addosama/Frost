@@ -1,5 +1,2 @@
-/run/
-*.mca
-*.log
-*.gz
-*.lock
+!/gradle/
+!/run/
