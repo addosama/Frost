@@ -1,5 +1,6 @@
 package me.addo6544.frost.core;
 
+import me.addo6544.frost.commond.CommandManager;
 import me.addo6544.frost.event.EventManager;
 import me.addo6544.frost.module.ModuleManager;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
@@ -18,6 +19,7 @@ public enum Frost {
 
     //Managers
     public EventManager eventManager;
+    public CommandManager commandManager;
     public ModuleManager moduleManager;
 
     //Utils
@@ -30,12 +32,14 @@ public enum Frost {
         Display.setTitle("Starting " + CLIENT_NAME);
         this.eventManager = new EventManager();
         this.moduleManager = new ModuleManager();
+        this.commandManager = new CommandManager();
 
         init();
     }
 
     public void init(){
         moduleManager.loadMods();
+        commandManager.loadCommands();
 
         Display.setTitle(CLIENT_NAME + " | " + RELEASE_TYPE.getType() + " " + CLIENT_VERSION);
         loaded = true;

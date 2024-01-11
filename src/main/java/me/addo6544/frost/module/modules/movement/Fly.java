@@ -4,6 +4,7 @@ import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventUpdate;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
+import me.addo6544.frost.module.setting.settings.BooleanSetting;
 import org.lwjgl.input.Keyboard;
 
 public class Fly extends Module {
