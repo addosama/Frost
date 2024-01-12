@@ -1,6 +1,7 @@
 package me.addo6544.frost.module.modules.movement;
 
 import me.addo6544.frost.event.EventTarget;
+import me.addo6544.frost.event.events.EventUpdate;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
 
@@ -10,7 +11,7 @@ public class Sprint extends Module {
     }
 
     @EventTarget
-    public void onUpdate(){
+    public void onUpdate(EventUpdate eventUpdate){
         mc.thePlayer.setSprinting(true);
     }
 }
