@@ -18,7 +18,7 @@ public class Cmd_Toggle extends Command {
         }else {
             m.toggle();
             String text = m.isState() ? "enabled" : "disabled";
-            ChatHelper.addMessage("Module " + m.getName() + "was " + text);
+            ChatHelper.addMessage("Module " + m.getName() + " was " + text);
         }
     }
 }

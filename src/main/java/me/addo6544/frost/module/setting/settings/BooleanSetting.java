@@ -6,9 +6,17 @@ public class BooleanSetting extends Setting {
 
     private boolean state;
 
-    public BooleanSetting(String name, boolean state) {
+    public BooleanSetting(String name, String description, boolean state) {
+        super();
         this.name = name;
         this.state = state;
+        this.description = description;
+    }
+    public BooleanSetting(String name, boolean state) {
+        super();
+        this.name = name;
+        this.state = state;
+        this.description = "";
     }
 
     public boolean isEnabled() {

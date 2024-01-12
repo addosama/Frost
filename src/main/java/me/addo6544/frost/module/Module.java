@@ -6,6 +6,7 @@ package me.addo6544.frost.module;
 //
 
 import me.addo6544.frost.core.Frost;
+import me.addo6544.frost.module.setting.ModuleSettings;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
@@ -21,6 +22,8 @@ public class Module implements Comparable<Module>{
         private int keyCode;
         private Category category;
 
+        public ModuleSettings settings;
+
         public final Minecraft mc = Minecraft.getMinecraft();
 
         public Module(String name, String description, int keyCode, Category category) {
@@ -29,6 +32,7 @@ public class Module implements Comparable<Module>{
             this.description = description;
             this.keyCode = keyCode;
             this.category = category;
+            this.settings = new ModuleSettings();
             this.logger = SimpleConsoleFormatter.installFormatter(Logger.getLogger(name));
         }
 
