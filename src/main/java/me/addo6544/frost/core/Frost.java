@@ -14,6 +14,7 @@ public enum Frost {
     //Client Info
     public static final String CLIENT_NAME = "Frost";
     public static final float CLIENT_VERSION = 1.0F;
+    public static final String CLIENT_WEBSITE = "frostmc.gg";
     public static final ReleaseType RELEASE_TYPE = ReleaseType.Development;
     public static boolean loaded = false;
 

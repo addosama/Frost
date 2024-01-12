@@ -1,6 +1,8 @@
 package me.addo6544.frost.commond;
 
+import me.addo6544.frost.commond.impl.Cmd_Bind;
 import me.addo6544.frost.commond.impl.Cmd_Help;
+import me.addo6544.frost.commond.impl.Cmd_Toggle;
 
 import java.util.ArrayList;
 
@@ -13,7 +15,10 @@ public class CommandManager {
     }
 
     public void loadCommands(){
-        addCommand(new Cmd_Help());
+        addCommand(new Cmd_Help());//index must be 0
+        //Commands
+        addCommand(new Cmd_Bind());
+        addCommand(new Cmd_Toggle());
     }
 
     public void addCommand(Command command){
@@ -43,5 +48,9 @@ public class CommandManager {
             if (c.name.equalsIgnoreCase(name)) return c;
         }
         return commands.get(0);
+    }
+
+    public ArrayList<Command> getCommands() {
+        return commands;
     }
 }

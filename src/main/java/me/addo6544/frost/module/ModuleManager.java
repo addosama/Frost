@@ -35,13 +35,16 @@ public class ModuleManager {
         this.addModule(new Fly());
 
         this.resortModules();
+
+
+        for (Module m : modules){
+            logger.info("Loaded Module : " + m.getName());
+        }
+
     }
 
     public void resortModules(){
         modules.sort(Module::compareTo);
-        for (Module m : modules){
-            logger.info("Loaded Module : " + m.getName());
-        }
     }
 
 
@@ -57,10 +60,17 @@ public class ModuleManager {
         }
     }
 
-    public Module getModuleByName(String name){
-        for (Module m : modules){
-            if(Objects.equals(m.getName(), name)) return m;
+    public Module getModuleByName(String name, boolean removeSpace){
+        if (removeSpace){
+            for (Module m : modules){
+                if (m.getName().replace(" ", "").equalsIgnoreCase(name)) return m;
+            }
+        }else {
+            for (Module m : modules){
+                if(m.getName().equalsIgnoreCase(name)) return m;
+            }
         }
+
         return null;
     }
 
