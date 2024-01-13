@@ -3,6 +3,7 @@ package me.addo6544.frost.ui.guihelper;
 import me.addo6544.frost.ui.guihelper.widget.Widget;
 import net.minecraft.client.gui.GuiScreen;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class FrostUI extends GuiScreen{
@@ -21,7 +22,15 @@ public abstract class FrostUI extends GuiScreen{
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         for (Widget widget : widgets){
-            widget.drawWidget(mouseX, mouseY, partialTicks);
+            widget.update(mouseX, mouseY, partialTicks);
+            widget.drawWidget();
+        }
+    }
+
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        for (Widget widget : widgets){
+            widget.mouseClicked(mouseX, mouseY, mouseButton);
         }
     }
 }
