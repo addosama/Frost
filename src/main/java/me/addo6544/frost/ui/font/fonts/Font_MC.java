@@ -4,7 +4,7 @@ import me.addo6544.frost.ui.font.FrostFR;
 
 public class Font_MC extends FrostFR {
 
-    public int height = mc.fontRendererObj.FONT_HEIGHT;
+    public final int FONT_HEIGHT = 9;
 
     @Override
     public void drawString(String text, float x, float y, int color) {
@@ -24,5 +24,10 @@ public class Font_MC extends FrostFR {
     @Override
     public int getStringWidth(String s) {
         return mc.fontRendererObj.getStringWidth(s);
+    }
+
+    @Override
+    public int getFontHeight() {
+        return 9;
     }
 }

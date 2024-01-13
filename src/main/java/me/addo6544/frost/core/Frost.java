@@ -3,6 +3,9 @@ package me.addo6544.frost.core;
 import me.addo6544.frost.commond.CommandManager;
 import me.addo6544.frost.event.EventManager;
 import me.addo6544.frost.module.ModuleManager;
+import me.addo6544.frost.module.modules.render.DebugUI;
+import me.addo6544.frost.ui.guihelper.FrostUI;
+import me.addo6544.frost.ui.test.TestUI;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 import org.lwjgl.opengl.Display;
 
@@ -23,6 +26,9 @@ public enum Frost {
     public CommandManager commandManager;
     public ModuleManager moduleManager;
 
+    //UI
+    public FrostUI debugUI;
+
     //Utils
     private Logger logger;
 
@@ -41,6 +47,8 @@ public enum Frost {
     public void init(){
         moduleManager.loadMods();
         commandManager.loadCommands();
+
+        debugUI = new TestUI();
 
         Display.setTitle(CLIENT_NAME + " | " + RELEASE_TYPE.getType() + " " + CLIENT_VERSION);
         loaded = true;

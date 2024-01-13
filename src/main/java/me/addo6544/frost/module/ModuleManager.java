@@ -13,6 +13,7 @@ import me.addo6544.frost.module.modules.movement.FastLiquid;
 import me.addo6544.frost.module.modules.movement.Fly;
 import me.addo6544.frost.module.modules.movement.Sprint;
 import me.addo6544.frost.module.modules.other.Panic;
+import me.addo6544.frost.module.modules.render.DebugUI;
 import me.addo6544.frost.module.modules.render.Interface;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 
@@ -37,6 +38,7 @@ public class ModuleManager {
         this.addModule(new Fly());
         this.addModule(new AutoAttack());
         this.addModule(new Panic());
+        this.addModule(new DebugUI());
 
         this.resortModules();
 

@@ -22,7 +22,7 @@ public class Module implements Comparable<Module>{
         private int keyCode;
         private Category category;
 
-        public ModuleSettings settings;
+        public ModuleSettings settings = new ModuleSettings();
 
         public final Minecraft mc = Minecraft.getMinecraft();
 
@@ -32,7 +32,7 @@ public class Module implements Comparable<Module>{
             this.description = description;
             this.keyCode = keyCode;
             this.category = category;
-            this.settings = new ModuleSettings();
+            //this.settings = new ModuleSettings();
             this.logger = SimpleConsoleFormatter.installFormatter(Logger.getLogger(name));
         }
 

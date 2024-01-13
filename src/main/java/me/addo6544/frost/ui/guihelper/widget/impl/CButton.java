@@ -5,7 +5,7 @@ import me.addo6544.frost.ui.guihelper.widget.Widget;
 
 import java.io.IOException;
 
-public class CButton extends Widget {
+public abstract class CButton extends Widget {
     private boolean hovering = false;
     public CButton(float x, float y, float width, float height, FrostUI ui){
         super(x, y, width, height, ui);
@@ -20,15 +20,8 @@ public class CButton extends Widget {
         }else hovering = false;
     }
 
-    @Override
-    public void drawWidget() {
-
-    }
-
-
-    public void onClick(int mouseX, int mouseY, int mouseButton){
-
-    }
+    public abstract void drawWidget();
+    public abstract void onClick(int mouseX, int mouseY, int mouseButton);
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
