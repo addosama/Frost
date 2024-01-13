@@ -8,9 +8,11 @@ package me.addo6544.frost.module;
 import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventKey;
+import me.addo6544.frost.module.modules.combat.AutoAttack;
 import me.addo6544.frost.module.modules.movement.FastLiquid;
 import me.addo6544.frost.module.modules.movement.Fly;
 import me.addo6544.frost.module.modules.movement.Sprint;
+import me.addo6544.frost.module.modules.other.Panic;
 import me.addo6544.frost.module.modules.render.Interface;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 
@@ -33,6 +35,8 @@ public class ModuleManager {
         this.addModule(new Sprint());
         this.addModule(new FastLiquid());
         this.addModule(new Fly());
+        this.addModule(new AutoAttack());
+        this.addModule(new Panic());
 
         this.resortModules();
 

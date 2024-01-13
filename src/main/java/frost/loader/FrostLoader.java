@@ -8,7 +8,6 @@ import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.main.GameConfiguration;
-import net.minecraft.client.main.Main;
 import net.minecraft.util.Session;
 
 import java.io.File;
