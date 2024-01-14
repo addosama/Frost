@@ -7,6 +7,7 @@ import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
 import me.addo6544.frost.ui.font.Fonts;
 import me.addo6544.frost.ui.font.FrostFR;
+import me.addo6544.frost.utils.TimeUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
@@ -37,7 +38,9 @@ class ClassicHUD{
 
 
     public static void drawWatermark(){
-        fr.drawStringWithShadow("Frost",2,2, -1);
+        String info = "[" + TimeUtil.getTime() + "] [" + Minecraft.getDebugFPS() + "FPS]";
+        fr.drawStringWithShadow(Frost.CLIENT_NAME + " ",2,2, -1);
+        fr.drawStringWithShadow(info, 2+fr.getStringWidth(Frost.CLIENT_NAME + " "), 2, -1);
     }
 
     public static void drawArraylist(){
