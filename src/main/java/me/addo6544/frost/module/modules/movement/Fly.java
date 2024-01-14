@@ -26,7 +26,7 @@ public class Fly extends Module {
     @EventTarget
     public void onUpdate(EventUpdate eventUpdate){
         if (mode.getConfigValue().equalsIgnoreCase("creative"))
-            mc.thePlayer.capabilities.allowFlying = true;
+            mc.thePlayer.capabilities.isFlying = true;
         if (mode.getConfigValue().equalsIgnoreCase("spartan"))
             if (mc.thePlayer.posY <= startY) mc.thePlayer.jump();
     }
@@ -34,5 +34,10 @@ public class Fly extends Module {
     @Override
     public void onEnable(){
         startY = mc.thePlayer.posY;
+    }
+
+    @Override
+    public void onDisable(){
+        if (mode.getConfigValue().equalsIgnoreCase("creative")) mc.thePlayer.capabilities.isFlying = false;
     }
 }
