@@ -20,6 +20,10 @@ public abstract class CButton extends Widget {
         }else hovering = false;
     }
 
+    public boolean isHovering() {
+        return hovering;
+    }
+
     public abstract void drawWidget();
     public abstract void onClick(int mouseX, int mouseY, int mouseButton);
 

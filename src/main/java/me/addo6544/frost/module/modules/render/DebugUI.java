@@ -12,5 +12,6 @@ public class DebugUI extends Module {
     @Override
     public void onEnable() {
         mc.displayGuiScreen(Frost.INSTANCE.debugUI);
+        setState(false);
     }
 }
