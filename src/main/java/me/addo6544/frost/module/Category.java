@@ -12,7 +12,6 @@ public enum Category {
     Player,
     World,
     Other,
-    Config,
     Extern,
     ;
 }
