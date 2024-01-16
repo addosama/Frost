@@ -42,7 +42,7 @@ public class Module implements Comparable<Module>{
         this.description = description;
         this.keyCode = Keyboard.KEY_NONE;
         this.category = category;
-        this.logger = Logger.getLogger(name);
+        this.logger = SimpleConsoleFormatter.installFormatter(Logger.getLogger(name));
     }
 
         public boolean isState() {
