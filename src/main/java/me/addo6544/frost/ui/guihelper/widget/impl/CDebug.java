@@ -4,13 +4,14 @@ import me.addo6544.frost.ui.font.Fonts;
 import me.addo6544.frost.ui.guihelper.FrostUI;
 import me.addo6544.frost.ui.guihelper.widget.Widget;
 import me.addo6544.frost.utils.RenderUtil;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 
 import java.awt.*;
 import java.io.IOException;
 
 public class CDebug extends Widget {
-    private final FontRenderer fr = Fonts.mc;
+    private final FontRenderer fr;
     private int mouseX, mouseY;
     private float partialTicks;
     private Color c;
@@ -19,6 +20,7 @@ public class CDebug extends Widget {
 
     public CDebug(FrostUI ui) {
         super(0, 0, ui.width, ui.height, ui);
+        fr = Minecraft.getMinecraft().fontRendererObj;
     }
 
     @Override
