@@ -9,6 +9,7 @@ import me.addo6544.frost.module.setting.settings.ModeSetting;
 import me.addo6544.frost.ui.font.FR;
 import me.addo6544.frost.ui.font.Fonts;
 import me.addo6544.frost.utils.RenderUtil;
+import me.addo6544.frost.utils.RoundedUtil;
 import me.addo6544.frost.utils.TimeUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -82,26 +83,41 @@ class ModernHUD{
 
         //draw
         //BG
-        RenderUtil.drawRoundedRect(
+        RoundedUtil.drawRound(
                 x,y,
-                x + 5 + pV + tW + pV + 5,
-                y + 30,
-                new Color(178,178,178).getRGB(),
-                new Color(0,0,0,50).getRGB()
+                5 + pV + tW + pV + 5,
+                30,
+                12,
+                new Color(0,0,0,50)
         );
 
         //Text BG and text
-        RenderUtil.drawRoundedRect(
+        RoundedUtil.drawRound(
                 x + 5,
                 y + 5,
-                x + 5 + pV + tW + pV,
-                y + 5 + 20,
-                new Color(0,153,235).getRGB()
+                pV + tW + pV,
+                20,
+                6,
+                new Color(0,153,235)
         );
         bb18.drawString("FROST", x+5+pV, y+5+pV, -1);
     }
 
     public static void drawArraylist(){
+        FR fr = Fonts.HMRegular18;
+        ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
+        ArrayList<Module> enabledModules = new ArrayList<>();
+        for (Module m : Frost.INSTANCE.moduleManager.getModules()){
+            if (m.isState()) enabledModules.add(m);
+        }
+        enabledModules.sort((o1, o2) -> (int) (fr.getStringWidth(o2.getName() + " " + o2.getTag()) - fr.getStringWidth(o1.getName() + " " + o1.getTag())));
+        int arrayIndex = 0;
+        for (Module module : enabledModules){
+            fr.drawStringWithShadow(module.getName(), sr.getScaledWidth()-2-fr.getStringWidth(module.getTag().isEmpty() ? module.getName() : module.getName() + " " + module.getTag()), 2 + arrayIndex, -1 );
+            if (!module.getTag().isEmpty())
+                fr.drawStringWithShadow(module.getTag(), sr.getScaledWidth()-2-fr.getStringWidth(module.getTag()), 2 + arrayIndex, new Color(153, 153, 153).getRGB() );
 
+            arrayIndex += (2+fr.FONT_HEIGHT);
+        }
     }
 }

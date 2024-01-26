@@ -119,8 +119,9 @@ public class TenaRenderUtil {
     public static double ticks = 0;
     public static long lastFrame = 0;
 
+    /*
     public static void drawCircle(Entity entity, float partialTicks, double rad, int color, float alpha) {
-        /*Got this from the people i made the Gui for*/
+        /*Got this from the people i made the Gui for
         ticks += .004 * (System.currentTimeMillis() - lastFrame);
 
         lastFrame = System.currentTimeMillis();
@@ -179,6 +180,7 @@ public class TenaRenderUtil {
         glPopMatrix();
         glColor4f(1f, 1f, 1f, 1f);
     }
+    */
 
     //From rise, alan gave me this
     public static void drawFilledCircleNoGL(int x, int y, double r, int c, int quality) {
@@ -198,6 +200,7 @@ public class TenaRenderUtil {
         GLUtil.end2DRendering();
     }
 
+    /*
     public static void renderBoundingBox(EntityLivingBase entityLivingBase, Color color, float alpha) {
         AxisAlignedBB bb = ESPUtil.getInterpolatedBoundingBox(entityLivingBase);
         GlStateManager.pushMatrix();
@@ -219,6 +222,8 @@ public class TenaRenderUtil {
 
         GlStateManager.popMatrix();
     }
+
+     */
 
     public static void circleNoSmoothRGB(double x, double y, double radius, int color) {
         radius /= 2;
@@ -266,6 +271,7 @@ public class TenaRenderUtil {
     }
 
     // Bad rounded rect method but the shader one requires scaling that sucks
+    /*
     public static void renderRoundedRect(float x, float y, float width, float height, float radius, int color) {
         RenderUtil.drawGoodCircle(x + radius, y + radius, radius, color);
         RenderUtil.drawGoodCircle(x + width - radius, y + radius, radius, color);
@@ -275,6 +281,8 @@ public class TenaRenderUtil {
         Gui.drawRect2(x + radius, y, width - radius * 2, height, color);
         Gui.drawRect2(x, y + radius, width, height - radius * 2, color);
     }
+
+     */
 
 
     // Scales the data that you put in the runnable
@@ -362,7 +370,8 @@ public class TenaRenderUtil {
         glPopMatrix();
     }
 
-    // Arrow for clickgui
+    // Arrow for clickgui\
+    /*
     public static void drawClickGuiArrow(float x, float y, float size, Animation animation, int color) {
         glTranslatef(x, y, 0);
         color(color);
@@ -387,6 +396,7 @@ public class TenaRenderUtil {
 
         glTranslatef(-x, -y, 0);
     }
+     */
 
     // Draws a circle using traditional methods of rendering
     public static void drawCircleNotSmooth(double x, double y, double radius, int color) {

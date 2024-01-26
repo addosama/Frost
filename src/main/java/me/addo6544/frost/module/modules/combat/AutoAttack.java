@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class AutoAttack extends Module {
 
     public BooleanSetting player = new BooleanSetting("Attack Players", false);
+    public String name = "None";
     public AutoAttack(){
         super("Auto Attack", "Auto attack entities", Category.Combat);
         this.settings.addSetting(player);
@@ -20,16 +21,23 @@ public class AutoAttack extends Module {
 
     @EventTarget
     public void onUpdate(EventUpdate e){
+        name = "None";
         ArrayList<Entity> es = new ArrayList<>(mc.theWorld.getLoadedEntityList());
         for (Entity en : es){
             if (en instanceof EntityLivingBase){
                 EntityLivingBase t = (EntityLivingBase) en;
                 if (t.isDead || t.isInvisible() || t.equals(mc.thePlayer) || t.getDistanceToEntity(mc.thePlayer) > 3) continue;
                 if (t.getHealth() > 0){
+                    name = t.getName();
                     mc.playerController.attackEntity(mc.thePlayer, t);
                     mc.thePlayer.swingItem();
                 }
             }
         }
+    }
+
+    @Override
+    public String getTag() {
+        return name;
     }
 }

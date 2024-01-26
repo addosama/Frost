@@ -55,4 +55,8 @@ public class AntiDebuff extends Module {
         }
     }
 
+    @Override
+    public String getTag() {
+        return mode.getConfigValue();
+    }
 }

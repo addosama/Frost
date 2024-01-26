@@ -40,4 +40,9 @@ public class Fly extends Module {
     public void onDisable(){
         if (mode.getConfigValue().equalsIgnoreCase("creative")) mc.thePlayer.capabilities.isFlying = false;
     }
+
+    @Override
+    public String getTag() {
+        return mode.getConfigValue();
+    }
 }

@@ -104,6 +104,10 @@ public class Module implements Comparable<Module>{
 
         }
 
+        public String getTag(){
+            return "";
+        }
+
     public String getDescription() {
         return description;
     }

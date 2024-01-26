@@ -23,4 +23,9 @@ public class FullBright extends Module {
             if (p.getAmplifier() == 1337) mc.thePlayer.removePotionEffect(p.getPotionID());
         }
     }
+
+    @Override
+    public String getTag() {
+        return "Effect";
+    }
 }
