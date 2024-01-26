@@ -6,13 +6,12 @@ import me.addo6544.frost.event.events.EventRender2D;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
 import me.addo6544.frost.ui.font.Fonts;
-import me.addo6544.frost.ui.font.FrostFR;
 import me.addo6544.frost.utils.TimeUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Interface extends Module {
@@ -34,11 +33,11 @@ public class Interface extends Module {
 }
 
 class ClassicHUD{
-    static FrostFR fr = Fonts.mc;
+    static FontRenderer fr = Fonts.mc;
 
 
     public static void drawWatermark(){
-        String info = "[" + TimeUtil.getTime() + "] [" + Minecraft.getDebugFPS() + "FPS]";
+        String info = "[" + TimeUtil.getTime() + "] [" + Minecraft.getDebugFPS() + " FPS]";
         fr.drawStringWithShadow(Frost.CLIENT_NAME + " ",2,2, -1);
         fr.drawStringWithShadow(info, 2+fr.getStringWidth(Frost.CLIENT_NAME + " "), 2, -1);
     }

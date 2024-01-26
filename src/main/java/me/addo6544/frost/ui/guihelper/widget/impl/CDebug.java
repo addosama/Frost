@@ -1,17 +1,16 @@
 package me.addo6544.frost.ui.guihelper.widget.impl;
 
 import me.addo6544.frost.ui.font.Fonts;
-import me.addo6544.frost.ui.font.FrostFR;
 import me.addo6544.frost.ui.guihelper.FrostUI;
 import me.addo6544.frost.ui.guihelper.widget.Widget;
-import me.addo6544.frost.utils.RenderUtils;
-import org.lwjgl.input.Mouse;
+import me.addo6544.frost.utils.RenderUtil;
+import net.minecraft.client.gui.FontRenderer;
 
 import java.awt.*;
 import java.io.IOException;
 
 public class CDebug extends Widget {
-    private final FrostFR fr = Fonts.mc;
+    private final FontRenderer fr = Fonts.mc;
     private int mouseX, mouseY;
     private float partialTicks;
     private Color c;
@@ -24,9 +23,9 @@ public class CDebug extends Widget {
 
     @Override
     public void drawWidget() {
-        RenderUtils.drawRect(mouseX,0,1,ui.height, c.getRGB());
-        RenderUtils.drawRect(0,mouseY, ui.width, 1, c.getRGB());
-        int h = fr.getFontHeight();
+        RenderUtil.drawRect(mouseX,0,1,ui.height, c.getRGB());
+        RenderUtil.drawRect(0,mouseY, ui.width, 1, c.getRGB());
+        int h = fr.FONT_HEIGHT;
         fr.drawStringWithShadow("FROST UI DEBUG INFOMATION", 1, 50, -1);
         fr.drawStringWithShadow("mouseX:" + mouseX, 2, 50+h, -1);
         fr.drawStringWithShadow("mouseY:" + mouseY, 2, 50+h*2, -1);

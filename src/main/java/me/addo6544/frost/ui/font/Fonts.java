@@ -1,7 +1,8 @@
 package me.addo6544.frost.ui.font;
 
-import me.addo6544.frost.ui.font.fonts.Font_MC;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 
 public class Fonts {
-    public static FrostFR mc = new Font_MC();
+    public static FontRenderer mc = Minecraft.getMinecraft().fontRendererObj;
 }
