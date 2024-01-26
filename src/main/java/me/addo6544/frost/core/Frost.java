@@ -4,6 +4,7 @@ import me.addo6544.frost.commond.CommandManager;
 import me.addo6544.frost.event.EventManager;
 import me.addo6544.frost.module.ModuleManager;
 import me.addo6544.frost.module.modules.render.DebugUI;
+import me.addo6544.frost.ui.font.Fonts;
 import me.addo6544.frost.ui.guihelper.FrostUI;
 import me.addo6544.frost.ui.test.TestUI;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;

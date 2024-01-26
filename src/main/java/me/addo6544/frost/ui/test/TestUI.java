@@ -6,6 +6,7 @@ import me.addo6544.frost.ui.guihelper.widget.impl.CButton;
 import me.addo6544.frost.ui.guihelper.widget.impl.CDebug;
 import me.addo6544.frost.utils.ChatHelper;
 import me.addo6544.frost.utils.RenderUtil;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 
 import java.awt.*;
@@ -14,9 +15,10 @@ public class TestUI extends FrostUI {
     public CDebug debugInfo = new CDebug(this);
 
 
-    private final FontRenderer fr = Fonts.mc;
+    private final FontRenderer fr;
     public TestUI() {
         super(false);
+        fr = Minecraft.getMinecraft().fontRendererObj;
         widgets.add(debugInfo);
         widgets.add(b1);
 
