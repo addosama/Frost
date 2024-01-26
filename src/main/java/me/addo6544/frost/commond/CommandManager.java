@@ -2,7 +2,9 @@ package me.addo6544.frost.commond;
 
 import me.addo6544.frost.commond.impl.Cmd_Bind;
 import me.addo6544.frost.commond.impl.Cmd_Help;
+import me.addo6544.frost.commond.impl.Cmd_Modules;
 import me.addo6544.frost.commond.impl.Cmd_Toggle;
+import me.addo6544.frost.utils.ChatHelper;
 
 import java.util.ArrayList;
 
@@ -19,6 +21,7 @@ public class CommandManager {
         //Commands
         addCommand(new Cmd_Bind());
         addCommand(new Cmd_Toggle());
+        addCommand(new Cmd_Modules());
     }
 
     public void addCommand(Command command){
@@ -40,7 +43,9 @@ public class CommandManager {
                 processed = true;
             }
         }
-        if (!processed) getCommand("help").run("");
+        if (!processed){
+            ChatHelper.addMessage("Invalid Command. Try >help");
+        }
     }
 
     public Command getCommand(String name){
