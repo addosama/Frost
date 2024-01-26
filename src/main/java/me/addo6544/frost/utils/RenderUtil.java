@@ -598,4 +598,9 @@ public class RenderUtil {
         GL11.glDisable(GL_BLEND);
         GL11.glDisable(GL_LINE_SMOOTH);
     }
+
+    public static void setAlphaLimit(float limit) {
+        GlStateManager.enableAlpha();
+        GlStateManager.alphaFunc(GL_GREATER, (float) (limit * .01));
+    }
 }

@@ -21,6 +21,20 @@ public class GLUtil {
         glEnable(GL_TEXTURE_2D);
         GlStateManager.disableBlend();
     }
+    public static void setup2DRendering() {
+        setup2DRendering(true);
+    }
+    public static void setup2DRendering(boolean blend) {
+        if (blend) {
+            startBlend();
+        }
+        GlStateManager.disableTexture2D();
+    }
+
+    public static void end2DRendering() {
+        GlStateManager.enableTexture2D();
+        endBlend();
+    }
 
     public static void rotate(float x, float y, float rotate, Runnable f) {
         GlStateManager.pushMatrix();
@@ -29,6 +43,16 @@ public class GLUtil {
         GlStateManager.translate(-x, -y, 0);
         f.run();
         GlStateManager.popMatrix();
+    }
+
+
+    public static void startBlend() {
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    }
+
+    public static void endBlend() {
+        GlStateManager.disableBlend();
     }
 
 
