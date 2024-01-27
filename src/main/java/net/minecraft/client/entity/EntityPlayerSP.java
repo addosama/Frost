@@ -1,6 +1,5 @@
 package net.minecraft.client.entity;
 
-import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.events.EventUpdate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
@@ -169,9 +168,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void onUpdate()
     {
-
         new EventUpdate().call();
-
         if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0D, this.posZ)))
         {
             super.onUpdate();
@@ -300,10 +297,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void sendChatMessage(String message)
     {
-        if (message.startsWith(Frost.INSTANCE.commandManager.prefix)){
-            Frost.INSTANCE.commandManager.processCommand(message);
-        }else this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
-
+        this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
     }
 
     /**

@@ -8,5 +8,4 @@ public class Main
     {
         FrostLoader.run(p_main_0_);
     }
-
 }

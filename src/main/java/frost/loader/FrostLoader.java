@@ -3,9 +3,7 @@ package frost.loader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.authlib.properties.PropertyMap;
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import joptsimple.OptionSpec;
+import joptsimple.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.main.GameConfiguration;
 import net.minecraft.util.Session;
@@ -19,7 +17,7 @@ import java.util.List;
 
 public class FrostLoader {
 
-    public static void run(String[] args){
+    public static void run(String[] p_main_0_){
         System.setProperty("java.net.preferIPv4Stack", "true");
         OptionParser optionparser = new OptionParser();
         optionparser.allowsUnrecognizedOptions();
@@ -46,7 +44,7 @@ public class FrostLoader {
         OptionSpec<String> optionspec17 = optionparser.accepts("assetIndex").withRequiredArg();
         OptionSpec<String> optionspec18 = optionparser.accepts("userType").withRequiredArg().defaultsTo("legacy", new String[0]);
         OptionSpec<String> optionspec19 = optionparser.nonOptions();
-        OptionSet optionset = optionparser.parse(args);
+        OptionSet optionset = optionparser.parse(p_main_0_);
         List<String> list = optionset.valuesOf(optionspec19);
 
         if (!list.isEmpty())
@@ -116,4 +114,5 @@ public class FrostLoader {
     {
         return str != null && !str.isEmpty();
     }
+
 }

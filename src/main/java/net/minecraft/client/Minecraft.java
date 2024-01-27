@@ -36,7 +36,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
-import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.events.EventKey;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -592,8 +591,6 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         }
 
         this.renderGlobal.makeEntityOutlineShader();
-
-        Frost.INSTANCE.preInit();
     }
 
     private void registerMetadataSerializers()
@@ -1916,7 +1913,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                     {
                         this.entityRenderer.switchUseShader();
                     }
+
                     new EventKey(k).call();
+
                     if (this.currentScreen != null)
                     {
                         this.currentScreen.handleKeyboardInput();
@@ -2701,7 +2700,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             {
                 StringBuilder stringbuilder = new StringBuilder();
 
-                for (String s : Minecraft.this.gameSettings.resourcePacks)
+                for (Object s : Minecraft.this.gameSettings.resourcePacks)
                 {
                     if (stringbuilder.length() > 0)
                     {
