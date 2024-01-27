@@ -229,8 +229,8 @@ public class FR {
         drawString(text, x, y, color);
     }
 
-    public int drawCenteredString(String text, float x, float y, int color) {
-        return drawString(text, x - getStringWidth(text) / 2, y, color);
+    public int drawCenteredString(String text, float x, float y, int color, boolean b) {
+        return drawString(text, x - (getStringWidth(text) / 2),  b?y - (FONT_HEIGHT / 2) : y, color);
     }
 
     public void drawCenteredStringWithAlpha(String text, float x, float y, int color, float alpha) {
@@ -238,8 +238,8 @@ public class FR {
     }
 
     public void drawCenteredStringWithShadow(String text, float x, float y, int color) {
-        drawCenteredString(StringUtils.stripControlCodes(text), x + 0.5F, y + 0.5F, 0xFF000000);
-        drawCenteredString(text, x, y, color);
+        drawCenteredString(StringUtils.stripControlCodes(text), x + 0.5F, y + 0.5F, 0xFF000000, true);
+        drawCenteredString(text, x, y, color, true);
     }
 
     public int drawHeightCenteredString(String text, float x, float y, int color) {

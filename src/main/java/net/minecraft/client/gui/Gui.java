@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import me.addo6544.frost.utils.RenderUtil;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -53,6 +54,8 @@ public class Gui
      */
     public static void drawRect(int left, int top, int right, int bottom, int color)
     {
+        RenderUtil.drawRect(left,top,right,bottom,color);
+        /***
         if (left < right)
         {
             int i = left;
@@ -85,6 +88,7 @@ public class Gui
         tessellator.draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
+         ***/
     }
 
     /**

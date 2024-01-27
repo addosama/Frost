@@ -3,7 +3,7 @@ package me.addo6544.frost.module.setting;
 import java.util.ArrayList;
 
 public class ModuleSettings {
-    public ArrayList<SettingBase> settings = new ArrayList<>();
+    protected ArrayList<SettingBase> settings = new ArrayList<>();
 
     public ModuleSettings(){
         //settings = new ArrayList<>();
@@ -11,5 +11,9 @@ public class ModuleSettings {
 
     public void addSetting(SettingBase settingBase){
         settings.add(settingBase);
+    }
+
+    public ArrayList<SettingBase> getSettings() {
+        return settings;
     }
 }

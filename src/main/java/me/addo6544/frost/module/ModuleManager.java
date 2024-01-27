@@ -14,6 +14,7 @@ import me.addo6544.frost.module.modules.movement.Fly;
 import me.addo6544.frost.module.modules.movement.Sprint;
 import me.addo6544.frost.module.modules.other.Panic;
 import me.addo6544.frost.module.modules.player.AntiDebuff;
+import me.addo6544.frost.module.modules.render.CGuiM;
 import me.addo6544.frost.module.modules.render.DebugUI;
 import me.addo6544.frost.module.modules.render.FullBright;
 import me.addo6544.frost.module.modules.render.Interface;
@@ -35,6 +36,7 @@ public class ModuleManager {
 
     public void loadMods() {
         this.addModule(new Interface());
+        this.addModule(new CGuiM());
         this.addModule(new Sprint());
         this.addModule(new FastLiquid());
         this.addModule(new Fly());

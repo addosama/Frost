@@ -22,7 +22,7 @@ public class Module implements Comparable<Module>{
         private int keyCode;
         private Category category;
 
-        public ModuleSettings settings = new ModuleSettings();
+        protected ModuleSettings settings = new ModuleSettings();
 
         public final Minecraft mc = Minecraft.getMinecraft();
 
@@ -107,6 +107,10 @@ public class Module implements Comparable<Module>{
         public String getTag(){
             return "";
         }
+
+    public ModuleSettings getSettings() {
+        return settings;
+    }
 
     public String getDescription() {
         return description;

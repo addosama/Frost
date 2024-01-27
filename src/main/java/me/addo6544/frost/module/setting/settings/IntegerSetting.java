@@ -1,9 +1,7 @@
 package me.addo6544.frost.module.setting.settings;
 
-import me.addo6544.frost.module.setting.Setting;
 
-public class IntegerSetting extends Setting {
-    private int min,max,value,increasement;
+public class IntegerSetting extends NumberSetting {
     public IntegerSetting(String name, String description, int min, int max, int current, int increasement){
         this.name = name;
         this.description = description;
@@ -24,30 +22,8 @@ public class IntegerSetting extends Setting {
 
     @Override
     public Integer getConfigValue() {
-        return value;
+        return value.intValue();
     }
 
-    public int getMin() {
-        return min;
-    }
 
-    public void setMin(int min) {
-        this.min = min;
-    }
-
-    public int getMax() {
-        return max;
-    }
-
-    public void setMax(int max) {
-        this.max = max;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public int getIncreasement() {
-        return increasement;
-    }
 }
