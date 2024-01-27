@@ -96,7 +96,7 @@ public class Button extends Component {
 
 	@Override
 	public void renderComponent() {
-		Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, this.isHovered ? (this.mod.isState() ? new Color(255, 0, 255, 191).darker().getRGB() : new Color(15, 15, 15, 191).getRGB()) : (this.mod.isState() ? new Color(255, 0, 255, 191).getRGB() : new Color(30, 30, 30, 191).getRGB()));
+		Gui.drawRect(parent.getX(), this.parent.getY() + this.offset, parent.getX() + parent.getWidth(), this.parent.getY() + 12 + this.offset, this.isHovered ? (this.mod.isState() ? new Color(0, 153, 235, 255).darker().getRGB() : new Color(15, 15, 15, 191).getRGB()) : (this.mod.isState() ? new Color(0, 153, 235, 255).getRGB() : new Color(30, 30, 30, 191).getRGB()));
 		Fonts.HMRegular18.drawString(this.mod.getName(), (parent.getX() + 2) + 2, (parent.getY() + offset + (6-(Fonts.HMRegular18.FONT_HEIGHT/2))) + 1, new Color(255, 255, 255).getRGB());
 		if(this.subcomponents.size() >= 1)
 			Fonts.HMRegular18.drawString(this.open ? "-" : "+", (parent.getX() + parent.getWidth() - 10), (parent.getY() + offset) + (6-(Fonts.HMRegular18.FONT_HEIGHT/2)), new Color(255, 255, 255, 255).getRGB());
@@ -105,7 +105,7 @@ public class Button extends Component {
 				for(Component comp : this.subcomponents) {
 					comp.renderComponent();
 				}
-				Gui.drawRect(parent.getX() + 2, parent.getY() + this.offset + 12, parent.getX() + 3, parent.getY() + this.offset + ((this.subcomponents.size() + 1) * 12), new Color(255, 0, 255, 191).getRGB());
+				Gui.drawRect(parent.getX() + 2, parent.getY() + this.offset + 12, parent.getX() + 3, parent.getY() + this.offset + ((this.subcomponents.size() + 1) * 12), new Color(0, 153, 235, 255).getRGB());
 			}
 		}
 	}

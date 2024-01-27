@@ -41,7 +41,7 @@ public class Checkbox extends Component {
 		Gui.drawRect(parent.parent.getX() + 1 + 5, parent.parent.getY() + offset + 3, parent.parent.getX() + 9 + 3, parent.parent.getY() + offset + 9,  new Color(89, 89, 89, 191).getRGB());
 		Fonts.HMRegular18.drawString(this.op.getName(), (parent.parent.getX()) + 17, (parent.parent.getY() + offset + (6-(Fonts.HMRegular18.FONT_HEIGHT/2))), new Color(255, 255, 255, 255).getRGB());
 		if (this.op.getConfigValue()) {
-			Gui.drawRect(parent.parent.getX() + 1 + 5, parent.parent.getY() + offset + 3, parent.parent.getX() + 9 + 3, parent.parent.getY() + offset + 9,  new Color(255, 0, 255, 191).getRGB());
+			Gui.drawRect(parent.parent.getX() + 1 + 5, parent.parent.getY() + offset + 3, parent.parent.getX() + 9 + 3, parent.parent.getY() + offset + 9,  new Color(0, 153, 235, 255).getRGB());
 		}
 	}
 	
