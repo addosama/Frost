@@ -7,6 +7,10 @@ import me.addo6544.frost.module.Module;
 import me.addo6544.frost.module.setting.settings.BooleanSetting;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemSword;
+import net.minecraft.network.play.client.C03PacketPlayer;
+import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
+import net.minecraft.network.play.client.C0BPacketEntityAction;
 
 import java.util.ArrayList;
 

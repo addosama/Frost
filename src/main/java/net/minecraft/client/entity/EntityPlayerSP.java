@@ -1,6 +1,8 @@
 package net.minecraft.client.entity;
 
+import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.events.EventUpdate;
+import me.addo6544.frost.module.modules.movement.NoSlow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -789,8 +791,12 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
         if (this.isUsingItem() && !this.isRiding())
         {
-            this.movementInput.moveStrafe *= 0.2F;
-            this.movementInput.moveForward *= 0.2F;
+            NoSlow noSlow = (NoSlow) Frost.INSTANCE.moduleManager.getModule(NoSlow.class);
+            if (!noSlow.isState() || !noSlow.mode.getConfigValue().equalsIgnoreCase("Remove")){
+                this.movementInput.moveStrafe *= 0.2F;
+                this.movementInput.moveForward *= 0.2F;
+            }
+
             this.sprintToggleTimer = 0;
         }
 
