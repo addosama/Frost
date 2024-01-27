@@ -1,5 +1,6 @@
 package net.minecraft.client.main;
 
+
 import frost.loader.FrostLoader;
 
 public class Main

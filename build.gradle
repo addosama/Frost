@@ -34,8 +34,8 @@ allprojects {
 }
 
 dependencies {
-    compile group: 'net.minecraft', name: 'minecraft', version: '1.8.9'//游戏本体
-    complie fileTree (dir: 'libs', include: ['*.jar'])
+    implementation group: 'net.minecraft', name: 'minecraft', version: '1.8.9'//游戏本体
+    implementation fileTree (dir: 'libs', include: ['*.jar'])
 }
 shadowJar {
     dependencies {

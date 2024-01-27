@@ -1,6 +1,7 @@
 package net.minecraft.client.gui;
 
 import me.addo6544.frost.utils.RenderUtil;
+import me.addo6544.frost.utils.TenaRenderUtil;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
