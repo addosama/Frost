@@ -30,12 +30,10 @@ public class Interface extends Module {
                     "Modern"
             )
             );
-    public BooleanSetting shader = new BooleanSetting("Blur (may not working)", false);
 
     public Interface(){
         super("Interface", "Client HUD", Keyboard.KEY_H, Category.Render);
         this.settings.addSetting(style);
-        this.settings.addSetting(shader);
     }
 
     @EventTarget
@@ -44,7 +42,7 @@ public class Interface extends Module {
             ClassicHUD.drawWatermark();
             ClassicHUD.drawArraylist();
         }else if (style.getConfigValue().equalsIgnoreCase("Modern")){
-            ModernHUD.drawWatermark(shader.getConfigValue());
+            ModernHUD.drawWatermark(false);
             ModernHUD.drawArraylist();
         }
     }
@@ -84,7 +82,7 @@ class ModernHUD{
         float y = 5;
 
         float tW = bb18.getStringWidth("FROST");//Name Text Width
-        float pV = (20 - bb18.FONT_HEIGHT) / 2;//Text Padding Value
+        float pV = ((float) 20 /2) - (bb18.FONT_HEIGHT / 2);//Text Padding Value
         float padding = 7.5F;
         float uSw = r18.getStringWidth(Frost.INSTANCE.user.username);
         float fpsSw = r18.getStringWidth(Minecraft.getDebugFPS() + " FPS");
@@ -110,31 +108,31 @@ class ModernHUD{
                 4,
                 new Color(0,153,235)
         );
-        bb18.drawString("FROST", x+5+pV, y+5+pV, -1);
+        bb18.drawString("FROST", x+5+pV, y+5+pV+0.5F, -1);
 
         //user
         RenderUtil.drawImage(new ResourceLocation("frost/icon/user.png"),
                 x+5+pV+tW+pV+padding,
-                y+((30-12)/2),
+                y+((float) (30/2)-((float) 12 /2)),
                 12,12
         );
         r18.drawString(
                 Frost.INSTANCE.user.username,
                 (float) (x + 5 + pV + tW + pV + padding + 12 + 2.5),
-                y+((30-r18.FONT_HEIGHT)/2),
+                y+((30/2)-(r18.FONT_HEIGHT /2))+0.5F,
                 -1
         );
 
         //fps
         RenderUtil.drawImage(new ResourceLocation("frost/icon/cpu.png"),
                 (float) (x+5 + pV + tW + pV + padding + 12 + 2.5 + uSw + padding),
-                y+((30-12)/2),
+                y+((float) (30/2) - ((float) 12 /2)),
                 12,12
         );
         r18.drawString(
                 Minecraft.getDebugFPS() + " FPS",
                 (float) (x + 5 + pV + tW + pV + padding + 12 + 2.5 + uSw + padding + 12 + 2.5),
-                y+((30-r18.FONT_HEIGHT)/2),
+                y+(((float) 30 /2)-(r18.FONT_HEIGHT/2))+0.5F,
                 -1
         );
 

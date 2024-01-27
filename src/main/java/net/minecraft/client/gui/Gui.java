@@ -1,7 +1,6 @@
 package net.minecraft.client.gui;
 
 import me.addo6544.frost.utils.RenderUtil;
-import me.addo6544.frost.utils.TenaRenderUtil;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -55,7 +54,38 @@ public class Gui
      */
     public static void drawRect(int left, int top, int right, int bottom, int color)
     {
-        RenderUtil.drawRect(left,top,right,bottom,color);
+        float e;
+
+        if (left < right) {
+            e = left;
+            left = right;
+            right = (int) e;
+        }
+
+        if (top < bottom) {
+            e = top;
+            top = bottom;
+            bottom = (int) e;
+        }
+
+        float a = (float) (color >> 24 & 255) / 255.0F;
+        float b = (float) (color >> 16 & 255) / 255.0F;
+        float c = (float) (color >> 8 & 255) / 255.0F;
+        float d = (float) (color & 255) / 255.0F;
+        WorldRenderer worldRenderer = Tessellator.getInstance().getWorldRenderer();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        GlStateManager.color(b, c, d, a);
+        worldRenderer.begin(7, DefaultVertexFormats.POSITION);
+        worldRenderer.pos(left, bottom, 0.0D).endVertex();
+        worldRenderer.pos(right, bottom, 0.0D).endVertex();
+        worldRenderer.pos(right, top, 0.0D).endVertex();
+        worldRenderer.pos(left, top, 0.0D).endVertex();
+        Tessellator.getInstance().draw();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
     /**
