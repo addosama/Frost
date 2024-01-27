@@ -204,8 +204,8 @@ public class FR {
         for (char c : text.toCharArray()) {
             if ((c < 50000 || c > 60000) && c != 9917) str += c;
         }
-        //text = str.replace("\247r", "").replace('?', '=').replace('?', '?').replace('?', '??').replace('?', '??').replace('?', '??').replace("?", "??").replace("?", "+");
-        //text = text.replace('?', '??').replace('?', '??').replace('?', '??').replace('?', '??').replace('?', '?J').replace('?', '?L').replace('?', '?I').replace('?', '?K');
+        //text = str.replace("\247r", "").replace('?', '=').replace('?', '?').replace("?", "¡î").replace("?", "¡î").replace("?", "¡î").replace("?", "¡î").replace("?", "+");
+        //text = text.replace("?", "¡û").replace("?", "¡ü").replace("?", "¡ý").replace("?", "¡ú").replace("?", "¨J").replace("?", "¨L").replace("?", "¨I").replace("?", "¨K");
         return text;
     }
 

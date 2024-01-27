@@ -18,6 +18,7 @@ import me.addo6544.frost.module.modules.render.CGuiM;
 import me.addo6544.frost.module.modules.render.DebugUI;
 import me.addo6544.frost.module.modules.render.FullBright;
 import me.addo6544.frost.module.modules.render.Interface;
+import me.addo6544.frost.module.modules.world.AntiBan;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 
 import java.util.ArrayList;
@@ -38,10 +39,11 @@ public class ModuleManager {
         this.addModule(new Interface());
         this.addModule(new CGuiM());
         this.addModule(new Sprint());
-        this.addModule(new FastLiquid());
+        //this.addModule(new FastLiquid());
         this.addModule(new Fly());
         this.addModule(new AutoAttack());
         this.addModule(new Panic());
+        this.addModule(new AntiBan());
         this.addModule(new DebugUI());
         this.addModule(new FullBright());
         this.addModule(new AntiDebuff());

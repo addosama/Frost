@@ -90,7 +90,7 @@ class ModernHUD{
         float fpsSw = r18.getStringWidth(Minecraft.getDebugFPS() + " FPS");
 
         //draw
-        r18.drawStringWithShadow("Shader " + (s ? "Enabled" : "Disabled"), 2, 50, -1);
+        //r18.drawStringWithShadow("Shader " + (s ? "Enabled" : "Disabled"), 2, 50, -1);
         //BG
         RoundedUtil.drawRound(
                 x,y,
