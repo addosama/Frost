@@ -9,7 +9,6 @@ import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventKey;
 import me.addo6544.frost.module.modules.combat.AutoAttack;
-import me.addo6544.frost.module.modules.movement.FastLiquid;
 import me.addo6544.frost.module.modules.movement.Fly;
 import me.addo6544.frost.module.modules.movement.NoSlow;
 import me.addo6544.frost.module.modules.movement.Sprint;
@@ -24,7 +23,6 @@ import me.addo6544.frost.utils.SimpleConsoleFormatter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 public class ModuleManager {
@@ -50,6 +48,8 @@ public class ModuleManager {
         this.addModule(new FullBright());
         this.addModule(new AntiDebuff());
 
+        this.loadExtern();
+
         this.resortModules();
 
 
@@ -61,6 +61,10 @@ public class ModuleManager {
 
     public void resortModules(){
         modules.sort(Module::compareTo);
+    }
+
+    public void loadExtern(){
+
     }
 
 
