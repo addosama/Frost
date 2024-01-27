@@ -1,5 +1,6 @@
 package me.addo6544.frost.core;
 
+import me.addo6544.frost.auth.FrostUser;
 import me.addo6544.frost.commond.CommandManager;
 import me.addo6544.frost.event.EventManager;
 import me.addo6544.frost.module.ModuleManager;
@@ -35,6 +36,9 @@ public enum Frost {
 
     //Utils
     private Logger logger;
+
+    //Auth
+    public FrostUser user = new FrostUser("Addo6544");
 
 
     public void preInit(){
