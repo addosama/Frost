@@ -12,6 +12,7 @@ import me.addo6544.frost.module.modules.combat.AutoAttack;
 import me.addo6544.frost.module.modules.movement.Fly;
 import me.addo6544.frost.module.modules.movement.NoSlow;
 import me.addo6544.frost.module.modules.movement.Sprint;
+import me.addo6544.frost.module.modules.other.NoCommands;
 import me.addo6544.frost.module.modules.other.Panic;
 import me.addo6544.frost.module.modules.player.AntiDebuff;
 import me.addo6544.frost.module.modules.render.CGuiM;
@@ -47,6 +48,7 @@ public class ModuleManager {
         this.addModule(new DebugUI());
         this.addModule(new FullBright());
         this.addModule(new AntiDebuff());
+        this.addModule(new NoCommands());
 
         this.loadExtern();
 

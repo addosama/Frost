@@ -21,6 +21,6 @@ public class AntiBan extends Module {
 
     @Override
     public String getTag() {
-        return "?";
+        return "你觉得这是真的吗?";
     }
 }

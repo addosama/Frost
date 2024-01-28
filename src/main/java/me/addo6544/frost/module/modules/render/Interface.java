@@ -27,7 +27,8 @@ public class Interface extends Module {
     public ModeSetting style = new ModeSetting("Style", "Interface Style", "Modern",
             Arrays.asList(
                     "Classic",
-                    "Modern"
+                    "Modern",
+                    "Power"
             )
             );
 
@@ -44,6 +45,9 @@ public class Interface extends Module {
         }else if (style.getConfigValue().equalsIgnoreCase("Modern")){
             ModernHUD.drawWatermark(false);
             ModernHUD.drawArraylist();
+        } else if (style.getConfigValue().equalsIgnoreCase("Power")) {
+            PowerHUD.drawWatermark();
+            PowerHUD.drawArraylist();
         }
     }
 }
@@ -73,7 +77,6 @@ class ClassicHUD{
         }
     }
 }
-
 class ModernHUD{
     public static FR bb18 = Fonts.HMBlack18;
     public static FR r18 = Fonts.HMRegular18;
@@ -154,5 +157,20 @@ class ModernHUD{
 
             arrayIndex += (2+fr.FONT_HEIGHT);
         }
+    }
+}
+class PowerHUD{
+    public static void drawWatermark(){
+        FR l42 = Fonts.HMLight42;
+        float padding = (25-l42.FONT_HEIGHT)/2;
+        float w = 2 + padding + l42.getStringWidth(Frost.CLIENT_NAME) + padding;
+        float h = 25;
+        RenderUtil.drawWHRect(2,2,w,h,new Color(0,0,0,128).getRGB());
+        RenderUtil.drawWHRect(2,2,2,h,-1);
+        l42.drawString(Frost.CLIENT_NAME, 2+2 + padding, 2+padding, -1);
+    }
+
+    public static void drawArraylist(){
+        ModernHUD.drawArraylist();
     }
 }

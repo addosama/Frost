@@ -8,8 +8,9 @@ import java.io.InputStream;
 
 public class Fonts {
     public static FontRenderer mc = Minecraft.getMinecraft().fontRendererObj;
-    public static FR HMBlack18 = new FR("HM_BLACK.ttf", Font.BOLD, 18, 7, false);
-    public static FR HMRegular18 = new FR("HM_REGULAR.ttf", Font.PLAIN, 18, 7, false);
+    public static FR HMBlack18 = new FR("HM_BLACK.ttf", Font.BOLD, 18, 7, true);
+    public static FR HMRegular18 = new FR("HM_REGULAR.ttf", Font.PLAIN, 18, 7, true);
+    public static FR HMLight42 = new FR("HM_LIGHT.ttf", Font.PLAIN, 42,7,true);
 
     public static Font getFont(String name, int size) {
         Font font;

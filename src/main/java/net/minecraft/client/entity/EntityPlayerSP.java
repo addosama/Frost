@@ -3,6 +3,7 @@ package net.minecraft.client.entity;
 import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.events.EventUpdate;
 import me.addo6544.frost.module.modules.movement.NoSlow;
+import me.addo6544.frost.module.modules.other.NoCommands;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -299,6 +300,10 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void sendChatMessage(String message)
     {
+        if (message.startsWith(">") && !Frost.INSTANCE.moduleManager.getModule(NoCommands.class).isState()){
+            Frost.INSTANCE.commandManager.processCommand(message);
+            return;
+        }
         this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
     }
 
