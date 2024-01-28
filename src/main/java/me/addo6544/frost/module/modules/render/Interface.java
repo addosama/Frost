@@ -6,6 +6,7 @@ import me.addo6544.frost.event.events.EventRender2D;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
 import me.addo6544.frost.module.setting.settings.BooleanSetting;
+import me.addo6544.frost.module.setting.settings.DoubleSetting;
 import me.addo6544.frost.module.setting.settings.ModeSetting;
 import me.addo6544.frost.ui.font.FR;
 import me.addo6544.frost.ui.font.Fonts;
@@ -32,9 +33,14 @@ public class Interface extends Module {
             )
             );
 
+    public DoubleSetting radius = new DoubleSetting("Radius", "For modern style", 0D, 15D, 8D);
+    public BooleanSetting rainbowC = new BooleanSetting("Rainbow", "rainbow color", false);
+
     public Interface(){
         super("Interface", "Client HUD", Keyboard.KEY_H, Category.Render);
         this.settings.addSetting(style);
+        this.settings.addSetting(rainbowC);
+        this.settings.addSetting(radius);
     }
 
     @EventTarget
@@ -43,8 +49,8 @@ public class Interface extends Module {
             ClassicHUD.drawWatermark();
             ClassicHUD.drawArraylist();
         }else if (style.getConfigValue().equalsIgnoreCase("Modern")){
-            ModernHUD.drawWatermark(false);
-            ModernHUD.drawArraylist();
+            ModernHUD.drawWatermark(rainbowC.getConfigValue(), radius.getConfigValue().floatValue());
+            ModernHUD.drawArraylist(rainbowC.getConfigValue());
         } else if (style.getConfigValue().equalsIgnoreCase("Power")) {
             PowerHUD.drawWatermark();
             PowerHUD.drawArraylist();
@@ -80,7 +86,8 @@ class ClassicHUD{
 class ModernHUD{
     public static FR bb18 = Fonts.HMBlack18;
     public static FR r18 = Fonts.HMRegular18;
-    public static void drawWatermark(boolean s){
+    public static Color rb2 = new Color(0,153,235);
+    public static void drawWatermark(boolean s, float radius){
         float x = 5;
         float y = 5;
 
@@ -93,24 +100,37 @@ class ModernHUD{
         //draw
         //r18.drawStringWithShadow("Shader " + (s ? "Enabled" : "Disabled"), 2, 50, -1);
         //BG
-        RoundedUtil.drawRound(
+        RoundedUtil.drawRoundOutline(
                 x,y,
                 (float) (5 + pV + tW + pV + padding + 12 + 2.5 + uSw + padding + 12 + 2.5 + fpsSw + 5),
                 30,
-                8,
-                s,
-                new Color(0,0,0, 128)
+                radius,
+                0.125F,
+                new Color(0,0,0, 128),
+                new Color(178,178,178)
         );
 
         //Text BG and text
-        RoundedUtil.drawRound(
-                x + 5,
-                y + 5,
-                pV + tW + pV,
-                20,
-                4,
-                new Color(0,153,235)
-        );
+        if (!s){
+            RoundedUtil.drawRound(
+                    x + 5,
+                    y + 5,
+                    pV + tW + pV,
+                    20,
+                    radius/2,
+                    new Color(0,153,235)
+            );
+        }else {
+            RoundedUtil.drawGradientVertical(
+                    x + 5,
+                    y + 5,
+                    pV + tW + pV,
+                    20,
+                    radius/2,
+                    new Color(0,0,0),
+                    rb2
+            );
+        }
         bb18.drawString("FROST", x+5+pV, y+5+pV+0.5F, -1);
 
         //user
@@ -141,7 +161,8 @@ class ModernHUD{
 
     }
 
-    public static void drawArraylist(){
+    public static void drawArraylist(boolean r){
+        int rainbowTickc = 0;
         FR fr = Fonts.HMRegular18;
         ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
         ArrayList<Module> enabledModules = new ArrayList<>();
@@ -151,11 +172,21 @@ class ModernHUD{
         enabledModules.sort((o1, o2) -> (int) (fr.getStringWidth(o2.getName() + " " + o2.getTag()) - fr.getStringWidth(o1.getName() + " " + o1.getTag())));
         int arrayIndex = 0;
         for (Module module : enabledModules){
-            fr.drawStringWithShadow(module.getName(), sr.getScaledWidth()-2-fr.getStringWidth(module.getTag().isEmpty() ? module.getName() : module.getName() + " " + module.getTag()), 2 + arrayIndex, -1 );
+            if (++rainbowTickc > 100) {
+                rainbowTickc = 0;
+            }
+
+            Color rainbow = new Color(
+                    Color.HSBtoRGB((float) ((double) Minecraft.getMinecraft().thePlayer.ticksExisted / 50.0
+                            - Math.sin((double) rainbowTickc / 40.0 * 1.4)) % 1.0f, 1.0f, 1.0f));
+
+
+            fr.drawStringWithShadow(module.getName(), sr.getScaledWidth()-2-fr.getStringWidth(module.getTag().isEmpty() ? module.getName() : module.getName() + " " + module.getTag()), 2 + arrayIndex, r ? rainbow.getRGB() : -1 );
             if (!module.getTag().isEmpty())
                 fr.drawStringWithShadow(module.getTag(), sr.getScaledWidth()-2-fr.getStringWidth(module.getTag()), 2 + arrayIndex, new Color(153, 153, 153).getRGB() );
 
             arrayIndex += (2+fr.FONT_HEIGHT);
+            rb2 = rainbow;
         }
     }
 }
@@ -171,6 +202,6 @@ class PowerHUD{
     }
 
     public static void drawArraylist(){
-        ModernHUD.drawArraylist();
+        ModernHUD.drawArraylist(false);
     }
 }

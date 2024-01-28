@@ -11,6 +11,7 @@ import me.addo6544.frost.module.setting.SettingGroup;
 import me.addo6544.frost.module.setting.settings.BooleanSetting;
 import me.addo6544.frost.module.setting.settings.IntegerSetting;
 import me.addo6544.frost.module.setting.settings.ModeSetting;
+import me.addo6544.frost.module.setting.settings.NumberSetting;
 import me.addo6544.frost.ui.clickgui.component.Component;
 import me.addo6544.frost.ui.clickgui.component.Frame;
 import me.addo6544.frost.ui.clickgui.component.components.sub.*;
@@ -55,7 +56,7 @@ public class Button extends Component {
 							this.subcomponents.add(new ModeButton(s1, this, mod, opY));
 							opY += 12;
 						}
-						if(s1 instanceof IntegerSetting){
+						if(s1 instanceof NumberSetting){
 							this.subcomponents.add(new Slider(s1, this, opY));
 							opY += 12;
 						}
@@ -70,7 +71,7 @@ public class Button extends Component {
 						this.subcomponents.add(new ModeButton(s, this, mod, opY));
 						opY += 12;
 					}
-					if(s instanceof IntegerSetting){
+					if(s instanceof NumberSetting){
 						this.subcomponents.add(new Slider(s, this, opY));
 						opY += 12;
 					}
