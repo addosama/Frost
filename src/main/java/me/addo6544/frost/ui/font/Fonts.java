@@ -11,6 +11,8 @@ public class Fonts {
     public static FR HMBlack18 = new FR("HM_BLACK.ttf", Font.BOLD, 18, 7, true);
     public static FR HMRegular18 = new FR("HM_REGULAR.ttf", Font.PLAIN, 18, 7, true);
     public static FR HMLight42 = new FR("HM_LIGHT.ttf", Font.PLAIN, 42,7,true);
+    public static FR HMBold24 = new FR("HM_BOLD.ttf", Font.PLAIN, 24, 7, true);
+    public static FR HMRegular12 = new FR("HM_REGULAR.ttf", Font.PLAIN, 12, 7, true);
 
     public static Font getFont(String name, int size) {
         Font font;

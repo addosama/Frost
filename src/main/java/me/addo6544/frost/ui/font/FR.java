@@ -1,6 +1,6 @@
 package me.addo6544.frost.ui.font;
 
-import me.addo6544.frost.utils.ColorUtil2;
+import me.addo6544.frost.utils.ColorUtil;
 import me.addo6544.frost.utils.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -73,7 +73,7 @@ public class FR {
     }
 
     public int drawString(String text, float x, float y, int color) {
-        if (color == 16777215) color = ColorUtil2.WHITE.c;
+        if (color == 16777215) color = ColorUtil.WHITE.c;
         return drawStringWithAlpha(text, x, y, color, (((color >> 24) & 0xFF) / 255f));
     }
 

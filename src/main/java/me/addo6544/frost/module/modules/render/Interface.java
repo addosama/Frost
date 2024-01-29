@@ -105,7 +105,7 @@ class ModernHUD{
                 (float) (5 + pV + tW + pV + padding + 12 + 2.5 + uSw + padding + 12 + 2.5 + fpsSw + 5),
                 30,
                 radius,
-                0.125F,
+                0.005F,
                 new Color(0,0,0, 128),
                 new Color(178,178,178)
         );
@@ -121,6 +121,10 @@ class ModernHUD{
                     new Color(0,153,235)
             );
         }else {
+            Color rb3 = new Color(rb2.getRGB());
+            float[] rb3hsb = new float[3];
+            Color.RGBtoHSB(rb3.getRed(),rb3.getGreen(),rb3.getBlue(), rb3hsb);
+            rb2 = new Color(Color.HSBtoRGB(rb3hsb[0],rb3hsb[1], (float) (rb3hsb[2]-0.3)));
             RoundedUtil.drawGradientVertical(
                     x + 5,
                     y + 5,
@@ -196,7 +200,7 @@ class PowerHUD{
         float padding = (25-l42.FONT_HEIGHT)/2;
         float w = 2 + padding + l42.getStringWidth(Frost.CLIENT_NAME) + padding;
         float h = 25;
-        RenderUtil.drawWHRect(2,2,w,h,new Color(0,0,0,128).getRGB());
+        RenderUtil.drawWHRect(2,2,w+2,h,new Color(0,0,0,128).getRGB());
         RenderUtil.drawWHRect(2,2,2,h,-1);
         l42.drawString(Frost.CLIENT_NAME, 2+2 + padding, 2+padding, -1);
     }

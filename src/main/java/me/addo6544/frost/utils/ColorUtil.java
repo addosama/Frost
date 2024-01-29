@@ -3,7 +3,7 @@ package me.addo6544.frost.utils;
 
 import java.awt.Color;
 
-public enum ColorUtil2 {
+public enum ColorUtil {
     BLACK(-16711423),
     BLUE(-12028161),
     DARKBLUE(-12621684),
@@ -25,7 +25,7 @@ public enum ColorUtil2 {
 
     public int c;
 
-    private ColorUtil2(int co) {
+    private ColorUtil(int co) {
         this.c = co;
     }
 
@@ -146,5 +146,22 @@ public enum ColorUtil2 {
         return Color.RGBtoHSB(currentColor.getRed(),
                 currentColor.getGreen(),
                 currentColor.getBlue(),null);
+    }
+
+    public static int HSBToINT(float[] hsb){
+        return Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
+    }
+
+    public static int HSBToINT(float h, float s, float b){
+        return Color.HSBtoRGB(h, s, b);
+    }
+
+    public static Color tripleColor(int rgbValue) {
+        return tripleColor(rgbValue, 1);
+    }
+
+    public static Color tripleColor(int rgbValue, float alpha) {
+        alpha = Math.min(1, Math.max(0, alpha));
+        return new Color(rgbValue, rgbValue, rgbValue, (int) (255 * alpha));
     }
 }

@@ -15,10 +15,7 @@ import me.addo6544.frost.module.modules.movement.Sprint;
 import me.addo6544.frost.module.modules.other.NoCommands;
 import me.addo6544.frost.module.modules.other.Panic;
 import me.addo6544.frost.module.modules.player.AntiDebuff;
-import me.addo6544.frost.module.modules.render.CGuiM;
-import me.addo6544.frost.module.modules.render.DebugUI;
-import me.addo6544.frost.module.modules.render.FullBright;
-import me.addo6544.frost.module.modules.render.Interface;
+import me.addo6544.frost.module.modules.render.*;
 import me.addo6544.frost.module.modules.world.AntiBan;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 
@@ -49,6 +46,7 @@ public class ModuleManager {
         this.addModule(new FullBright());
         this.addModule(new AntiDebuff());
         this.addModule(new NoCommands());
+        this.addModule(new TargetHUDMod());
 
         this.loadExtern();
 
