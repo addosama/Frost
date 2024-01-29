@@ -73,7 +73,7 @@ public class TargetHUD {
         GLUtil.endBlend();
 
         b24.drawString(target.getName(), x+55,y+10,-1);
-        r12.drawString((int)target.getHealth() + " | Distance:" + mc.thePlayer.getDistanceToEntity(target), x+55,y+10+b24.FONT_HEIGHT+2, -1);
+        r12.drawString((int)target.getHealth() + "HP | Distance:" + mc.thePlayer.getDistanceToEntity(target), x+55,y+10+b24.FONT_HEIGHT+2, -1);
         float bW = b24.getStringWidth(target.getName()) * (target.getHealth()/target.getMaxHealth());
         RoundedUtil.drawGradientVertical(
                 x+55,y+10+b24.FONT_HEIGHT+2+r12.FONT_HEIGHT+2,
