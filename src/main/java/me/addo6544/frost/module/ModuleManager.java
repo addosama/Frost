@@ -9,8 +9,10 @@ import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventKey;
 import me.addo6544.frost.module.modules.combat.AutoAttack;
+import me.addo6544.frost.module.modules.combat.Velocity;
 import me.addo6544.frost.module.modules.movement.Fly;
 import me.addo6544.frost.module.modules.movement.NoSlow;
+import me.addo6544.frost.module.modules.movement.Speed;
 import me.addo6544.frost.module.modules.movement.Sprint;
 import me.addo6544.frost.module.modules.other.NoCommands;
 import me.addo6544.frost.module.modules.other.Panic;
@@ -47,6 +49,8 @@ public class ModuleManager {
         this.addModule(new AntiDebuff());
         this.addModule(new NoCommands());
         this.addModule(new TargetHUDMod());
+        this.addModule(new Velocity());
+        this.addModule(new Speed());
 
         this.loadExtern();
 

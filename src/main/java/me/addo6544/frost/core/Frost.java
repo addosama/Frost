@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.opengl.Display;
 
+import javax.swing.*;
 import java.util.logging.Logger;
 
 public enum Frost {
@@ -39,7 +40,7 @@ public enum Frost {
     private Logger logger;
 
     //Auth
-    public FrostUser user = new FrostUser(Minecraft.getMinecraft().thePlayer.getName());
+    public FrostUser user;
 
 
     public void preInit(){
@@ -54,6 +55,7 @@ public enum Frost {
     }
 
     public void init(){
+        user = new FrostUser("Addo6544");
         moduleManager.loadMods();
         commandManager.loadCommands();
 

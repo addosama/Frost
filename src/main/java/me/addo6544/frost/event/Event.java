@@ -44,6 +44,10 @@ public abstract class Event {
         return type;
     }
 
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public boolean isCancelled() {
         return cancelled;
     }

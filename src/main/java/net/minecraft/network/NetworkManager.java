@@ -32,6 +32,10 @@ import java.net.SocketAddress;
 import java.util.Queue;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.crypto.SecretKey;
+
+import me.addo6544.frost.event.Event;
+import me.addo6544.frost.event.events.EventPacketReceive;
+import me.addo6544.frost.event.events.EventPacketSend;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.CryptManager;
@@ -152,7 +156,11 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
         {
             try
             {
+                EventPacketReceive e = new EventPacketReceive(Event.Type.PRE, p_channelRead0_2_);
+                e.call();
+                if (e.isCancelled()) return;
                 p_channelRead0_2_.processPacket(this.packetListener);
+                new EventPacketReceive(Event.Type.POST, p_channelRead0_2_).call();
             }
             catch (ThreadQuickExitException var4)
             {
@@ -172,8 +180,15 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
         this.packetListener = handler;
     }
 
-    public void sendPacket(Packet packetIn)
+    public void sendPacket(Packet packetIn){
+        sendPacket(packetIn, true);
+    }
+
+    public void sendPacket(Packet packetIn, boolean event)
     {
+        EventPacketSend preEvent = new EventPacketSend(Event.Type.PRE, packetIn);
+        if (event) preEvent.call();
+        if (preEvent.isCancelled()) return;
         if (this.isChannelOpen())
         {
             this.flushOutboundQueue();
@@ -192,6 +207,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
                 this.field_181680_j.writeLock().unlock();
             }
         }
+        if (event) new EventPacketSend(Event.Type.POST, packetIn).call();
     }
 
     public void sendPacket(Packet packetIn, GenericFutureListener <? extends Future <? super Void >> listener, GenericFutureListener <? extends Future <? super Void >> ... listeners)
