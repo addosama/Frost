@@ -17,6 +17,7 @@ import me.addo6544.frost.module.modules.movement.Sprint;
 import me.addo6544.frost.module.modules.other.NoCommands;
 import me.addo6544.frost.module.modules.other.Panic;
 import me.addo6544.frost.module.modules.player.AntiDebuff;
+import me.addo6544.frost.module.modules.player.NoFall;
 import me.addo6544.frost.module.modules.render.*;
 import me.addo6544.frost.module.modules.world.AntiBan;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
@@ -51,6 +52,7 @@ public class ModuleManager {
         this.addModule(new TargetHUDMod());
         this.addModule(new Velocity());
         this.addModule(new Speed());
+        this.addModule(new NoFall());
 
         this.loadExtern();
 
