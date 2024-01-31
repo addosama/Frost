@@ -1,5 +1,7 @@
 package me.addo6544.frost.module.setting.settings;
 
+import me.addo6544.frost.event.Event;
+import me.addo6544.frost.event.events.EventSettingModeChange;
 import me.addo6544.frost.module.setting.Setting;
 import me.addo6544.frost.module.setting.exceptions.InvalidModeException;
 
@@ -28,7 +30,10 @@ public class ModeSetting extends Setting{
         boolean setted = false;
         for (String s : modes){
             if (s.equalsIgnoreCase(mode)) {
+                final String old = currentMode;
+                new EventSettingModeChange(Event.Type.PRE, old, s);
                 currentMode = s;
+                new EventSettingModeChange(Event.Type.POST, old, s);
                 setted = true;
             }
         }

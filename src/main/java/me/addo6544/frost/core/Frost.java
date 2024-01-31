@@ -10,6 +10,7 @@ import me.addo6544.frost.ui.font.Fonts;
 import me.addo6544.frost.ui.guihelper.FrostUI;
 import me.addo6544.frost.ui.test.TestUI;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.opengl.Display;
 
@@ -21,7 +22,7 @@ public enum Frost {
     //Client Info
     public static final String CLIENT_NAME = "Frost";
     public static final float CLIENT_VERSION = 1.3F;
-    public static final String CLIENT_WEBSITE = "frostmc.gg";
+    //public static final String CLIENT_WEBSITE = "frostmc.gg";
     public static final ReleaseType RELEASE_TYPE = ReleaseType.Development;
     public static boolean loaded = false;
 
@@ -38,7 +39,7 @@ public enum Frost {
     private Logger logger;
 
     //Auth
-    public FrostUser user = new FrostUser("Addo6544");
+    public FrostUser user = new FrostUser(Minecraft.getMinecraft().thePlayer.getName());
 
 
     public void preInit(){

@@ -51,7 +51,6 @@ public class AutoAttack extends Module {
         }else hud.setVisible(false);;
         mc.playerController.attackEntity(mc.thePlayer, en);
         mc.thePlayer.swingItem();
-        target = null;
     }
 
     @Override
