@@ -47,11 +47,13 @@ public class AutoAttack extends Module {
 
     public void attack(EntityLivingBase en){
         target = en;
+        /****
         TargetHUD hud = ((TargetHUDMod) Frost.INSTANCE.moduleManager.getModule(TargetHUDMod.class)).getHud();
         if (target instanceof AbstractClientPlayer){
             hud.setTarget((AbstractClientPlayer) target);
             hud.setVisible(true);
         }else hud.setVisible(false);;
+         ****/
         mc.playerController.attackEntity(mc.thePlayer, en);
         mc.thePlayer.swingItem();
     }

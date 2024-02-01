@@ -45,7 +45,7 @@ public class TargetHUD {
     }
 
     public void render(){
-        if (!visible) return;
+        if (!visible || target == null) return;
         String s1 = target.getName();
         String s2 = (int)target.getHealth() + "HP | Distance:" + new DecimalFormat("0.00").format(mc.thePlayer.getDistanceToEntity(target));
         String text = b24.getStringWidth(s1) >= r12.getStringWidth(s2) ? s1 : s2;

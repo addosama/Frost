@@ -9,6 +9,7 @@ import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventKey;
 import me.addo6544.frost.module.modules.combat.AutoAttack;
+import me.addo6544.frost.module.modules.combat.KillAura;
 import me.addo6544.frost.module.modules.combat.Velocity;
 import me.addo6544.frost.module.modules.movement.Fly;
 import me.addo6544.frost.module.modules.movement.NoSlow;
@@ -53,6 +54,7 @@ public class ModuleManager {
         this.addModule(new Velocity());
         this.addModule(new Speed());
         this.addModule(new NoFall());
+        this.addModule(new KillAura());
 
         this.loadExtern();
 
