@@ -38,6 +38,8 @@ import javax.imageio.ImageIO;
 
 import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.events.EventKey;
+import me.addo6544.frost.ui.font.Fonts;
+import me.addo6544.frost.ui.screen.ClientSplashScreen;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
@@ -507,6 +509,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             this.fontRendererObj.setBidiFlag(this.mcLanguageManager.isCurrentLanguageBidirectional());
         }
 
+        Fonts.initFonts();
+
         this.standardGalacticFontRenderer = new FontRenderer(this.gameSettings, new ResourceLocation("textures/font/ascii_sga.png"), this.renderEngine, false);
         this.mcResourceManager.registerReloadListener(this.fontRendererObj);
         this.mcResourceManager.registerReloadListener(this.standardGalacticFontRenderer);
@@ -565,11 +569,11 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
         if (this.serverName != null)
         {
-            this.displayGuiScreen(new GuiConnecting(new GuiMainMenu(), this, this.serverName, this.serverPort));
+            this.displayGuiScreen(new ClientSplashScreen( this, this.serverName, this.serverPort));
         }
         else
         {
-            this.displayGuiScreen(new GuiMainMenu());
+            this.displayGuiScreen(new ClientSplashScreen());
         }
 
         this.renderEngine.deleteTexture(this.mojangLogo);
@@ -592,8 +596,6 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         }
 
         this.renderGlobal.makeEntityOutlineShader();
-
-        Frost.INSTANCE.preInit();
     }
 
     private void registerMetadataSerializers()

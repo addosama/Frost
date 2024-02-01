@@ -38,6 +38,7 @@ public enum Frost {
 
     //Utils
     private Logger logger;
+    private String loadState = "Please Wait";
 
     //Auth
     public FrostUser user;
@@ -47,23 +48,37 @@ public enum Frost {
         this.logger = SimpleConsoleFormatter.installFormatter(Logger.getLogger("Client Core"));
         logger.info("Starting | Version: " + RELEASE_TYPE.getType() + " - " + CLIENT_VERSION);
         Display.setTitle("Starting " + CLIENT_NAME);
+        loadState = "Initializing EventManager";
         this.eventManager = new EventManager();
+        loadState = "Initializing ModuleManager";
         this.moduleManager = new ModuleManager();
+        loadState = "Initializing CommandManager";
         this.commandManager = new CommandManager();
 
         init();
     }
 
     public void init(){
+        //loadState = "Initializing Fonts";
+        //Fonts.initFonts();
+        loadState = "Setting User";
         user = new FrostUser("Addo6544");
+        loadState = "Loading Modules";
         moduleManager.loadMods();
+        loadState = "Loading Commands";
         commandManager.loadCommands();
 
+        loadState = "Loading UI";
         debugUI = new TestUI();
         CGUI_Classic = new ClickGui();
 
+        loadState = "Finishing";
         Display.setTitle(CLIENT_NAME + " | " + RELEASE_TYPE.getType() + " " + CLIENT_VERSION);
         loaded = true;
+    }
+
+    public String getLoadState() {
+        return loadState;
     }
 }
 
