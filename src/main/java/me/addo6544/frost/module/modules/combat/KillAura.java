@@ -11,6 +11,7 @@ import me.addo6544.frost.module.setting.settings.BooleanSetting;
 import me.addo6544.frost.module.setting.settings.DoubleSetting;
 import me.addo6544.frost.module.setting.settings.IntegerSetting;
 import me.addo6544.frost.module.setting.settings.ModeSetting;
+import me.addo6544.frost.utils.DelayHelper;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -128,9 +129,7 @@ public class KillAura extends Module {
         } else if (mode.getConfigValue().equalsIgnoreCase("Single")){
             EntityLivingBase tg = null;
 
-            if (sortMode.getConfigValue().equalsIgnoreCase("Random"))
-                emptyMethod();
-            else if (sortMode.getConfigValue().equalsIgnoreCase("Distance"))
+            if (sortMode.getConfigValue().equalsIgnoreCase("Distance"))
                 targets.sort((o1, o2) -> (int) ((mc.thePlayer.getDistanceToEntity(o1)) - (mc.thePlayer.getDistanceToEntity(o2))));
 
             tg=targets.get(0);
@@ -144,6 +143,29 @@ public class KillAura extends Module {
                 mc.playerController.attackEntity(mc.thePlayer, tg);
                 if (!noSwing.getConfigValue()) mc.thePlayer.swingItem();
             }
+        } else if (mode.getConfigValue().equalsIgnoreCase("Switch")) {
+                EntityLivingBase tg = null;
+                int attacked = 0;
+
+                if (sortMode.getConfigValue().equalsIgnoreCase("Distance"))
+                    targets.sort((o1, o2) -> (int) ((mc.thePlayer.getDistanceToEntity(o1)) - (mc.thePlayer.getDistanceToEntity(o2))));
+
+                if (attacked != 0 && DelayHelper.delay(switchDelay.getConfigValue())){
+                    tg = targets.get(attacked);
+                    attacked = attacked + 1;
+                    if (attacked > targets.size()) attacked = 0;
+                }else {
+                    tg = targets.get(attacked);
+                }
+
+                if (tg instanceof AbstractClientPlayer)
+                    tghud.getHud().setTarget((AbstractClientPlayer) tg);
+                if (mc.thePlayer.getDistanceToEntity(tg) <= swingRange.getConfigValue() && !noSwing.getConfigValue())
+                    mc.thePlayer.swingItem();
+                if (mc.thePlayer.getDistanceToEntity(tg) <= maxAttackRange.getConfigValue()) {
+                    mc.playerController.attackEntity(mc.thePlayer, tg);
+                    if (!noSwing.getConfigValue()) mc.thePlayer.swingItem();
+                }
         }
     }
 
@@ -160,9 +182,5 @@ public class KillAura extends Module {
         targets.clear();
         tghud.getHud().setVisible(false);
         tghud.getHud().setTarget(null);
-    }
-
-    private void emptyMethod(){
-
     }
 }

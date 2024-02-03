@@ -61,8 +61,6 @@ public enum Frost {
     public void init(){
         //loadState = "Initializing Fonts";
         //Fonts.initFonts();
-        loadState = "Setting User";
-        user = new FrostUser("Addo6544");
         loadState = "Loading Modules";
         moduleManager.loadMods();
         loadState = "Loading Commands";
@@ -79,6 +77,10 @@ public enum Frost {
 
     public String getLoadState() {
         return loadState;
+    }
+
+    public void setUser(FrostUser user) {
+        this.user = user;
     }
 }
 
