@@ -49,7 +49,8 @@ public class Button extends Component {
 			for(SettingBase se : mod.getSettings().getSettings()){
 				if (se.isGroup){
 					SettingGroup s = (SettingGroup) se;
-					this.subcomponents.add(new Text(this, s.name, opY));
+					Text t = new Text(this, s.name, opY);
+					this.subcomponents.add(t);
 					opY += 12;
 					for (Setting s1 : s.getSettings()){
 						if(s1 instanceof ModeSetting){

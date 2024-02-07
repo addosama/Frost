@@ -1,10 +1,14 @@
 package net.minecraft.client.gui;
 
+import me.addo6544.frost.ui.font.Fonts;
+import me.addo6544.frost.utils.RoundedUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
+
+import java.awt.*;
 
 public class GuiButton extends Gui
 {
@@ -80,28 +84,40 @@ public class GuiButton extends Gui
         if (this.visible)
         {
             FontRenderer fontrenderer = mc.fontRendererObj;
-            mc.getTextureManager().bindTexture(buttonTextures);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            //mc.getTextureManager().bindTexture(buttonTextures);
+            //GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
             int i = this.getHoverState(this.hovered);
-            GlStateManager.enableBlend();
-            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-            GlStateManager.blendFunc(770, 771);
-            this.drawTexturedModalRect(this.xPosition, this.yPosition, 0, 46 + i * 20, this.width / 2, this.height);
-            this.drawTexturedModalRect(this.xPosition + this.width / 2, this.yPosition, 200 - this.width / 2, 46 + i * 20, this.width / 2, this.height);
+            //GlStateManager.enableBlend();
+            //GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+            //GlStateManager.blendFunc(770, 771);
+            //this.drawTexturedModalRect(this.xPosition, this.yPosition, 0, 46 + i * 20, this.width / 2, this.height);
+            //this.drawTexturedModalRect(this.xPosition + this.width / 2, this.yPosition, 200 - this.width / 2, 46 + i * 20, this.width / 2, this.height);
+
+            Color color = new Color(0,0,0,128);
+            if (!this.enabled){
+                color = new Color(23, 23, 23,128);
+            }else if (this.hovered){
+                color = new Color(86, 86, 86,128);
+            }
+            RoundedUtil.drawRound(this.xPosition+0.25F,this.yPosition+0.25F, this.width-0.25F,this.height-0.25F,
+                    2,
+                    color
+                    );
+
             this.mouseDragged(mc, mouseX, mouseY);
-            int j = 14737632;
+            int j = new Color(255, 255, 255).getRGB();
 
             if (!this.enabled)
             {
-                j = 10526880;
+                j = new Color(82, 82, 82).getRGB();
             }
             else if (this.hovered)
             {
-                j = 16777120;
+                j = new Color(0, 157, 255).getRGB();
             }
 
-            this.drawCenteredString(fontrenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, j);
+            Fonts.HMRegular18.drawCenteredStringWithShadow(this.displayString, this.xPosition + this.width / 2, this.yPosition  + this.height/ 2, j);
         }
     }
 

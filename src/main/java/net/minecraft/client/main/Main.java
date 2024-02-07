@@ -6,6 +6,7 @@ public class Main
 {
     public static void main(String[] p_main_0_)
     {
+        /***
         String token = "";
 
         for (String s : p_main_0_){
@@ -20,6 +21,7 @@ public class Main
         }
 
         if (token.isEmpty()) return;
-        Validator.tryStart(token, p_main_0_);
+         ***/
+        Validator.tryStart("token", p_main_0_);
     }
 }

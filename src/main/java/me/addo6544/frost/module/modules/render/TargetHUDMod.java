@@ -7,10 +7,9 @@ import me.addo6544.frost.module.Module;
 import me.addo6544.frost.ui.hud.target.TargetHUD;
 
 public class TargetHUDMod extends Module {
-    private TargetHUD hud;
+    public TargetHUD hud;
     public TargetHUDMod(){
         super("Target HUD", "Display target info", Category.Render);
-        this.hud = new TargetHUD(5,50);
     }
 
     public TargetHUD getHud() {

@@ -37,14 +37,28 @@ public class KillAura extends Module {
     public BooleanSetting targetMobs = new BooleanSetting("Mobs", "Target Mobs", true);
     public BooleanSetting targetInvisible = new BooleanSetting("Invisible", "Target Invisible", true);
 
-    public SettingGroup attackOption;
-    public BooleanSetting noSwing = new BooleanSetting("No Swing", "Don't swing item", false);
-    public IntegerSetting switchDelay = new IntegerSetting("Switch Delay", "", 50, 1000, 300);
-
     public SettingGroup rangeOption;
     public DoubleSetting minAttackRange = new DoubleSetting("Min Attack Range", "Minimum attack range", 0D,6D,0D);
     public DoubleSetting maxAttackRange = new DoubleSetting("Max Attack Range", "Maxmium attack range", 0D,6D,3D);
     public DoubleSetting swingRange = new DoubleSetting("Swing Range", "Swing item if target in range", 0D,6D,4D);
+
+    public SettingGroup rotationOption;
+    public ModeSetting rotationMode = new ModeSetting("Rotation Mode", "", "Basic",
+            Arrays.asList(
+                    "Basic"
+            )
+            );
+    public IntegerSetting rotationBasicHitHeight = new IntegerSetting("Hit Height Percent",
+            "Hit this height of the player",
+            0,100,80,1
+            );
+    public DoubleSetting playerEyeHeight = new DoubleSetting("Player eyes height", "", 0D,2D,1.8D,0.01D);
+
+    public SettingGroup attackOption;
+    public BooleanSetting checkRotate = new BooleanSetting("Check Rotate", "Check rotate is valid", false);
+    public BooleanSetting noSwing = new BooleanSetting("No Swing", "Don't swing item", false);
+    public IntegerSetting switchDelay = new IntegerSetting("Switch Delay", "", 50, 1000, 300);
+
 
     private TargetHUDMod tghud;
 
@@ -58,29 +72,44 @@ public class KillAura extends Module {
         swingRange.addParent(!noSwing.getConfigValue());
         sortMode.addParent(!mode.getConfigValue().equals("Multi"));
         switchDelay.addParent(mode.getConfigValue().equals("Switch"));
+        rotationBasicHitHeight.addParent(rotationMode.getConfigValue().equalsIgnoreCase("Basic"));
 
         targetsOption = new SettingGroup("Targets", Arrays.asList(
                 targetPlayers,targetAnimals,targetMobs,targetInvisible
         ));
-        attackOption = new SettingGroup("Attack Options", Arrays.asList(
-                noSwing,switchDelay
-        ));
         rangeOption = new SettingGroup("Range Options", Arrays.asList(
                 minAttackRange,maxAttackRange,swingRange
+        ));
+        rotationOption = new SettingGroup("Rotation Options", Arrays.asList(
+                rotationMode, rotationBasicHitHeight, playerEyeHeight
+        ));
+        attackOption = new SettingGroup("Attack Options", Arrays.asList(
+                checkRotate,noSwing,switchDelay
         ));
 
         this.settings.addSetting(mode);
         this.settings.addSetting(sortMode);
         this.settings.addSetting(targetsOption);
-        this.settings.addSetting(attackOption);
         this.settings.addSetting(rangeOption);
+        this.settings.addSetting(rotationOption);
+        this.settings.addSetting(attackOption);
     }
 
     @EventTarget
     public void onUpdate(EventUpdate e){
         processEntities(mc.theWorld.loadedEntityList);
         if (targets.isEmpty()) return;
+        rotate();
+        if (checkRotate.getConfigValue() && !canAttack()) return;
         attack();
+    }
+
+    private void rotate(){
+
+    }
+
+    private boolean canAttack(){
+        return true;
     }
 
     private void processEntities(List<Entity> entities){

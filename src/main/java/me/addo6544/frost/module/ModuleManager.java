@@ -21,6 +21,9 @@ import me.addo6544.frost.module.modules.player.AntiDebuff;
 import me.addo6544.frost.module.modules.player.NoFall;
 import me.addo6544.frost.module.modules.render.*;
 import me.addo6544.frost.module.modules.world.AntiBan;
+import me.addo6544.frost.module.setting.Setting;
+import me.addo6544.frost.module.setting.SettingBase;
+import me.addo6544.frost.module.setting.SettingGroup;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 
 import java.util.ArrayList;
@@ -65,6 +68,30 @@ public class ModuleManager {
             logger.info("Loaded Module : " + m.getName());
         }
 
+        printInfo();
+    }
+
+    private void printInfo(){
+        logger.info("Loaded " + getModulesCount() + " modules and " + getSettingsCount() + " settings");
+    }
+
+    public int getModulesCount(){
+        return modules.size();
+    }
+
+    public int getSettingsCount(){
+        int s = 0;
+        for (Module m : modules){
+            for (SettingBase b : m.getSettings().getSettings()){
+                if (b.isGroup){
+                    SettingGroup sg = (SettingGroup) b;
+                    s = s + sg.getSettings().size();
+                }else {
+                    s = s+1;
+                }
+            }
+        }
+        return s;
     }
 
     public void resortModules(){
