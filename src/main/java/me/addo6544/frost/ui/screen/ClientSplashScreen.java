@@ -46,6 +46,7 @@ public class ClientSplashScreen extends GuiScreen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         if (Frost.INSTANCE.loaded){
+            Fonts.initFonts();
             if (connect) {
                 mc.displayGuiScreen(new GuiConnecting(new ClientMainMenu(), mcIn, servername, serverPort));
             } else {

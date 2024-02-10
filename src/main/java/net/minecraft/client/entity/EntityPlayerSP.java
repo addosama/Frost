@@ -288,7 +288,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
             }
             motionEvent.setType(Event.Type.POST);
             motionEvent.call();
-            //this.rotationPitchHead = motionEvent.getPitch();
+            this.rotationPitchHead = motionEvent.getPitch();
         }
     }
 

@@ -6,6 +6,7 @@ package me.addo6544.frost.module;
 //
 
 import me.addo6544.frost.core.Frost;
+import me.addo6544.frost.core.ReleaseType;
 import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventKey;
 import me.addo6544.frost.module.modules.combat.AutoAttack;
@@ -19,6 +20,8 @@ import me.addo6544.frost.module.modules.other.NoCommands;
 import me.addo6544.frost.module.modules.other.Panic;
 import me.addo6544.frost.module.modules.player.AntiDebuff;
 import me.addo6544.frost.module.modules.player.NoFall;
+import me.addo6544.frost.module.modules.player.RotationSetter;
+import me.addo6544.frost.module.modules.player.SpinBot;
 import me.addo6544.frost.module.modules.render.*;
 import me.addo6544.frost.module.modules.world.AntiBan;
 import me.addo6544.frost.module.setting.Setting;
@@ -58,6 +61,8 @@ public class ModuleManager {
         this.addModule(new Speed());
         this.addModule(new NoFall());
         this.addModule(new KillAura());
+        this.addModule(new SpinBot());
+        if (Frost.RELEASE_TYPE.equals(ReleaseType.Development)) this.addModule(new RotationSetter());
 
         this.loadExtern();
 

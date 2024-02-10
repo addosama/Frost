@@ -68,11 +68,6 @@ public enum Frost {
         loadState = "Loading Commands";
         commandManager.loadCommands();
 
-        loadState = "Initializing Fonts";
-        logger.info("FONTS");
-        Fonts.initFonts();
-        logger.info("FONTS FINISHED");
-
         loadState = "Loading UI";
         TargetHUDMod tgHUD = (TargetHUDMod) moduleManager.getModule(TargetHUDMod.class);
         tgHUD.hud = new TargetHUD(5,50);
