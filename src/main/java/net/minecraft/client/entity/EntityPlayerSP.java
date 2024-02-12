@@ -34,8 +34,7 @@ import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
@@ -823,10 +822,32 @@ public class EntityPlayerSP extends AbstractClientPlayer
         if (this.isUsingItem() && !this.isRiding())
         {
             NoSlow noSlow = (NoSlow) Frost.INSTANCE.moduleManager.getModule(NoSlow.class);
-            if (!noSlow.isState() || !noSlow.mode.getConfigValue().equalsIgnoreCase("Remove")){
-                this.movementInput.moveStrafe *= 0.2F;
-                this.movementInput.moveForward *= 0.2F;
+            float strafe = 0.2f;
+            float forward = 0.2f;
+
+            if (noSlow.isState()){
+                if (noSlow.mode.getConfigValue().equalsIgnoreCase("Edit")){
+                    Item i = mc.thePlayer.getHeldItem().getItem();
+
+                    if (i instanceof ItemSword) {
+                        strafe = noSlow.swordStrafe.getConfigValue().floatValue();
+                        forward = noSlow.swordForward.getConfigValue().floatValue();
+                    } else if (i instanceof ItemFood) {
+                        strafe = noSlow.foodStrafe.getConfigValue().floatValue();
+                        forward = noSlow.foodForward.getConfigValue().floatValue();
+                    } else if (i instanceof ItemBow)  {
+                        strafe = noSlow.bowStrafe.getConfigValue().floatValue();
+                        forward = noSlow.bowForward.getConfigValue().floatValue();
+                    } else {
+                        strafe = 0.2f;
+                        forward = 0.2f;
+                    }
+                }
             }
+
+
+            this.movementInput.moveStrafe *= strafe;
+            this.movementInput.moveForward *= forward;
 
             this.sprintToggleTimer = 0;
         }
