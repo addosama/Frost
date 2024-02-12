@@ -112,26 +112,27 @@ class ModernHUD{
 
         //Text BG and text
         if (!s){
-            RoundedUtil.drawRound(
-                    x + 5,
-                    y + 5,
-                    pV + tW + pV,
-                    20,
-                    radius/2,
-                    new Color(0,153,235)
-            );
-        }else {
-            Color rb3 = new Color(rb2.getRGB());
-            float[] rb3hsb = new float[3];
-            Color.RGBtoHSB(rb3.getRed(),rb3.getGreen(),rb3.getBlue(), rb3hsb);
-            rb2 = new Color(Color.HSBtoRGB(rb3hsb[0],rb3hsb[1], (float) (rb3hsb[2]-0.3)));
             RoundedUtil.drawGradientVertical(
                     x + 5,
                     y + 5,
                     pV + tW + pV,
                     20,
                     radius/2,
-                    new Color(0,0,0),
+                    new Color(117, 194,235),
+                    new Color(0,153,235)
+            );
+        }else {
+            Color rb3 = new Color(rb2.getRGB());
+            float[] rb3hsb = new float[3];
+            Color.RGBtoHSB(rb3.getRed(),rb3.getGreen(),rb3.getBlue(), rb3hsb);
+            rb2 = new Color(Color.HSBtoRGB(rb3hsb[0],rb3hsb[1], (float) (rb3hsb[2]-0.45)));
+            RoundedUtil.drawGradientVertical(
+                    x + 5,
+                    y + 5,
+                    pV + tW + pV,
+                    20,
+                    radius/2,
+                    rb3,
                     rb2
             );
         }
