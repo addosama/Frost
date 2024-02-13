@@ -50,7 +50,7 @@ public class ModuleManager {
         this.addModule(new Fly());
         this.addModule(new AutoAttack());
         this.addModule(new Panic());
-        this.addModule(new AntiBan());
+        this.addModule(new AntiBan());//just for fun
         this.addModule(new NoSlow());
         this.addModule(new DebugUI());
         this.addModule(new FullBright());
