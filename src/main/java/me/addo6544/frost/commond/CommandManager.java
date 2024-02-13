@@ -1,9 +1,6 @@
 package me.addo6544.frost.commond;
 
-import me.addo6544.frost.commond.impl.Cmd_Bind;
-import me.addo6544.frost.commond.impl.Cmd_Help;
-import me.addo6544.frost.commond.impl.Cmd_Modules;
-import me.addo6544.frost.commond.impl.Cmd_Toggle;
+import me.addo6544.frost.commond.impl.*;
 import me.addo6544.frost.utils.ChatHelper;
 
 import java.util.ArrayList;
@@ -22,6 +19,7 @@ public class CommandManager {
         addCommand(new Cmd_Bind());
         addCommand(new Cmd_Toggle());
         addCommand(new Cmd_Modules());
+        addCommand(new Cmd_Reload());
     }
 
     public void addCommand(Command command){

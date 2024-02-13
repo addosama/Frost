@@ -5,6 +5,7 @@ import me.addo6544.frost.commond.CommandManager;
 import me.addo6544.frost.event.Event;
 import me.addo6544.frost.event.EventManager;
 import me.addo6544.frost.event.events.EventInit;
+import me.addo6544.frost.extern.ExternSystem;
 import me.addo6544.frost.module.ModuleManager;
 import me.addo6544.frost.module.modules.render.DebugUI;
 import me.addo6544.frost.module.modules.render.TargetHUDMod;
@@ -19,6 +20,7 @@ import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.opengl.Display;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.logging.Logger;
 
 public enum Frost {
@@ -27,6 +29,7 @@ public enum Frost {
     //Client Info
     public static final String CLIENT_NAME = "Frost";
     public static final float CLIENT_VERSION = 1.5F;
+    public static final String CLIENT_PATH = System.getProperty("user.dir") + "\\frost\\";
     //public static final String CLIENT_WEBSITE = "frostmc.gg";
     public static final ReleaseType RELEASE_TYPE = ReleaseType.Development;
     public static boolean loaded = false;
@@ -58,21 +61,57 @@ public enum Frost {
         this.moduleManager = new ModuleManager();
         loadState = "Initializing CommandManager";
         this.commandManager = new CommandManager();
-        Frost.INSTANCE.init();
+        loadState = "Files";
+        if (!new File(CLIENT_PATH).exists()){
+            new File(CLIENT_PATH).mkdirs();
+        }
+        loadState = "Initializing Extern System";
+        ExternSystem.init();
+
+        Frost.INSTANCE.init(0);
     }
 
-    public void init(){
+    public void init(int code){
         new EventInit(Event.Type.PRE).call();
-        loadState = "Loading Modules";
-        moduleManager.loadMods();
-        loadState = "Loading Commands";
-        commandManager.loadCommands();
+        while (code == 0){
+            loadState = "Loading Modules";
+            moduleManager.loadMods();
 
-        loadState = "Loading UI";
-        TargetHUDMod tgHUD = (TargetHUDMod) moduleManager.getModule(TargetHUDMod.class);
-        tgHUD.hud = new TargetHUD(5,50);
-        debugUI = new TestUI();
-        CGUI_Classic = new ClickGui();
+            if (!loaded) code = code+1; else return;
+        }
+
+        while (code == 1){
+            loadState = "Loading Commands";
+            commandManager.loadCommands();
+
+            if (!loaded) code = code+1; else return;
+        }
+
+        while (code == 2){
+            loadState = "Initializing Fonts";
+            logger.info("FONTS");
+            Fonts.initFonts();
+            logger.info("FONTS FINISHED");
+
+            if (!loaded) code = code+1; else return;
+        }
+
+        while (code == 3){
+            loadState = "Loading UI";
+            TargetHUDMod tgHUD = (TargetHUDMod) moduleManager.getModule(TargetHUDMod.class);
+            tgHUD.hud = new TargetHUD(5,50);
+            debugUI = new TestUI();
+            CGUI_Classic = new ClickGui();
+
+            if (!loaded) code = code+1; else return;
+        }
+
+        while (code == 4){
+            loadState = "Loading Externs";
+            ExternSystem.loadAddons();
+
+            if (!loaded) code = code+1; else return;
+        }
 
         loadState = "Finishing";
         Display.setTitle(CLIENT_NAME + " | " + RELEASE_TYPE.getType() + " " + CLIENT_VERSION);

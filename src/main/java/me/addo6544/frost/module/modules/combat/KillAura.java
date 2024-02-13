@@ -2,6 +2,7 @@ package me.addo6544.frost.module.modules.combat;
 
 import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.EventTarget;
+import me.addo6544.frost.event.events.EventMotion;
 import me.addo6544.frost.event.events.EventRender2D;
 import me.addo6544.frost.event.events.EventUpdate;
 import me.addo6544.frost.module.Category;
@@ -102,7 +103,6 @@ public class KillAura extends Module {
     public void onUpdate(EventUpdate e){
         processEntities(mc.theWorld.loadedEntityList);
         if (targets.isEmpty()) return;
-        rotate();
         if (checkRotate.getConfigValue() && !canAttack()) return;
         attack();
     }
@@ -111,7 +111,8 @@ public class KillAura extends Module {
     private float p = 100;
     private double a,b,c = 0;
 
-    private void rotate(){
+    @EventTarget
+    private void rotate(EventMotion e){
         EntityLivingBase t = targets.get(0);
         float pitch;
         float yaw = EntityUtil.getYawToEntity(mc.thePlayer, t);
@@ -125,8 +126,8 @@ public class KillAura extends Module {
         y = yaw;
         p = 90-pitch;
 
-        mc.thePlayer.rotationYaw = yaw;
-        mc.thePlayer.rotationPitch = 90-pitch;
+        e.setYaw(yaw);
+        e.setPitch(90-pitch);
     }
 
     @EventTarget
