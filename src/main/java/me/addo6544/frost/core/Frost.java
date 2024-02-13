@@ -9,6 +9,7 @@ import me.addo6544.frost.extern.ExternSystem;
 import me.addo6544.frost.module.ModuleManager;
 import me.addo6544.frost.module.modules.render.DebugUI;
 import me.addo6544.frost.module.modules.render.TargetHUDMod;
+import me.addo6544.frost.notifications.NotificationManager;
 import me.addo6544.frost.ui.clickgui.ClickGui;
 import me.addo6544.frost.ui.font.Fonts;
 import me.addo6544.frost.ui.guihelper.FrostUI;
@@ -38,6 +39,7 @@ public enum Frost {
     public EventManager eventManager;
     public CommandManager commandManager;
     public ModuleManager moduleManager;
+    public NotificationManager notificationManager;
 
     //UI
     public FrostUI debugUI;
@@ -98,6 +100,7 @@ public enum Frost {
 
         while (code == 3){
             loadState = "Loading UI";
+            this.notificationManager = new NotificationManager();
             TargetHUDMod tgHUD = (TargetHUDMod) moduleManager.getModule(TargetHUDMod.class);
             tgHUD.hud = new TargetHUD(5,50);
             debugUI = new TestUI();

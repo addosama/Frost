@@ -7,6 +7,7 @@ package me.addo6544.frost.module;
 
 import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.module.setting.ModuleSettings;
+import me.addo6544.frost.ui.notification.Notification;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
@@ -53,7 +54,15 @@ public class Module implements Comparable<Module>{
             this.state = state;
             if(state){
                 Enable();
-            }else Disable();
+                Frost.INSTANCE.notificationManager.newNotification(
+                        new Notification("Module Toggled", name + " enabled", Notification.NColors.GREEN)
+                );
+            }else {
+                Disable();
+                Frost.INSTANCE.notificationManager.newNotification(
+                        new Notification("Module Toggled", name + " disabled", Notification.NColors.RED)
+                );
+            }
         }
 
         public String getName() {
