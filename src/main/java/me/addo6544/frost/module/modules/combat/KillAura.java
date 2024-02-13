@@ -2,6 +2,7 @@ package me.addo6544.frost.module.modules.combat;
 
 import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.EventTarget;
+import me.addo6544.frost.event.events.EventRender2D;
 import me.addo6544.frost.event.events.EventUpdate;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
@@ -11,7 +12,9 @@ import me.addo6544.frost.module.setting.settings.BooleanSetting;
 import me.addo6544.frost.module.setting.settings.DoubleSetting;
 import me.addo6544.frost.module.setting.settings.IntegerSetting;
 import me.addo6544.frost.module.setting.settings.ModeSetting;
+import me.addo6544.frost.ui.font.Fonts;
 import me.addo6544.frost.utils.DelayHelper;
+import me.addo6544.frost.utils.EntityUtil;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -52,7 +55,7 @@ public class KillAura extends Module {
             "Hit this height of the player",
             0,100,80,1
             );
-    public DoubleSetting playerEyeHeight = new DoubleSetting("Player eyes height", "", 0D,2D,1.8D,0.01D);
+    public IntegerSetting playerEyeHeight = new IntegerSetting("Player eyes height", "", 0,100,80);
 
     public SettingGroup attackOption;
     public BooleanSetting checkRotate = new BooleanSetting("Check Rotate", "Check rotate is valid", false);
@@ -104,8 +107,35 @@ public class KillAura extends Module {
         attack();
     }
 
-    private void rotate(){
+    private float y = 100;
+    private float p = 100;
+    private double a,b,c = 0;
 
+    private void rotate(){
+        EntityLivingBase t = targets.get(0);
+        float pitch;
+        float yaw = EntityUtil.getYawToEntity(mc.thePlayer, t);
+
+        a = (playerEyeHeight.getConfigValue()*mc.thePlayer.height) - (rotationBasicHitHeight.getConfigValue()*(t.height/100));
+        b = mc.thePlayer.getDistanceToEntity(t);
+        c = Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
+
+        pitch = (float) Math.asin(b/c);
+
+        y = yaw;
+        p = 90-pitch;
+
+        mc.thePlayer.rotationYaw = yaw;
+        mc.thePlayer.rotationPitch = 90-pitch;
+    }
+
+    @EventTarget
+    public void onRender(EventRender2D e){
+        Fonts.HMRegular12.drawString("YAW - " + y, 5, 45, -1);
+        Fonts.HMRegular12.drawString("PITCH - " + p, 5, 45+ Fonts.HMRegular12.FONT_HEIGHT, -1);
+        Fonts.HMRegular12.drawString("A - " + a, 5, 45+ Fonts.HMRegular12.FONT_HEIGHT+ Fonts.HMRegular12.FONT_HEIGHT, -1);
+        Fonts.HMRegular12.drawString("B - " + b, 5, 45+ Fonts.HMRegular12.FONT_HEIGHT+ Fonts.HMRegular12.FONT_HEIGHT+ Fonts.HMRegular12.FONT_HEIGHT, -1);
+        Fonts.HMRegular12.drawString("C - " + c, 5, 45+ Fonts.HMRegular12.FONT_HEIGHT+ Fonts.HMRegular12.FONT_HEIGHT+ Fonts.HMRegular12.FONT_HEIGHT+ Fonts.HMRegular12.FONT_HEIGHT, -1);
     }
 
     private boolean canAttack(){
