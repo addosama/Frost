@@ -79,8 +79,8 @@ public class TargetHUD {
                 x+55,y+10+b24.FONT_HEIGHT+2+r12.FONT_HEIGHT+2,
                 bW,5,
                 2.5F,
-                new Color(99,130,255),
-                new Color(0,51,255)
+                new Color(127, 127, 255),
+                new Color(0, 0,255)
         );
     }
 }
