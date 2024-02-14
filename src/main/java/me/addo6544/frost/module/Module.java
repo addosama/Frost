@@ -7,11 +7,15 @@ package me.addo6544.frost.module;
 
 import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.module.setting.ModuleSettings;
+import me.addo6544.frost.module.setting.Setting;
+import me.addo6544.frost.module.setting.SettingBase;
+import me.addo6544.frost.module.setting.SettingGroup;
 import me.addo6544.frost.ui.notification.Notification;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -123,6 +127,31 @@ public class Module implements Comparable<Module>{
 
     public String getDescription() {
         return description;
+    }
+
+    public Setting getSetting(String name, String groupName){
+            if (groupName.isEmpty()){
+                for (SettingBase base : settings.getSettings()){
+                    if (base.isGroup) continue;
+                    if (name.equalsIgnoreCase(base.name)) return (Setting) base;
+                }
+            }else {
+                for (SettingBase base : settings.getSettings()){
+                    if (!base.isGroup) continue;
+                    if (name.equalsIgnoreCase(groupName)){
+                        SettingGroup sg = (SettingGroup) base;
+                        for (Setting s : sg.getSettings()){
+                            if (s.name.equalsIgnoreCase(name)) return s;
+                        }
+                    }
+                }
+            }
+
+            return null;
+    }
+
+    public Setting getSetting(String name){
+            return getSetting(name, "");
     }
 
     @Override
