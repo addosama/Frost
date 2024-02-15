@@ -167,8 +167,6 @@ public abstract class EntityLivingBase extends Entity
     /** The new yaw rotation to be applied to the entity. */
     protected double newRotationPitch;
 
-    public float rotationPitchHead;
-
     /** Whether the DataWatcher needs to be updated with the active potions */
     private boolean potionsNeedUpdate = true;
 
