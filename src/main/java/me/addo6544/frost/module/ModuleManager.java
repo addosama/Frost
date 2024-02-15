@@ -6,7 +6,6 @@ package me.addo6544.frost.module;
 //
 
 import me.addo6544.frost.core.Frost;
-import me.addo6544.frost.core.ReleaseType;
 import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventKey;
 import me.addo6544.frost.module.modules.combat.AutoAttack;
@@ -20,8 +19,6 @@ import me.addo6544.frost.module.modules.other.NoCommands;
 import me.addo6544.frost.module.modules.other.Panic;
 import me.addo6544.frost.module.modules.player.AntiDebuff;
 import me.addo6544.frost.module.modules.player.NoFall;
-import me.addo6544.frost.module.modules.player.RotationSetter;
-import me.addo6544.frost.module.modules.player.SpinBot;
 import me.addo6544.frost.module.modules.render.*;
 import me.addo6544.frost.module.modules.world.AntiBan;
 import me.addo6544.frost.module.setting.Setting;
@@ -43,26 +40,24 @@ public class ModuleManager {
     }
 
     public void loadMods() {
-        this.addModule(new Interface());
-        this.addModule(new CGuiM());
-        this.addModule(new Sprint());
+        this.addModule(new Interface(), false);
+        this.addModule(new CGuiM(), false);
+        this.addModule(new Sprint(), false);
         //this.addModule(new FastLiquid());
-        this.addModule(new Fly());
-        this.addModule(new AutoAttack());
-        this.addModule(new Panic());
-        this.addModule(new AntiBan());//just for fun
-        this.addModule(new NoSlow());
-        this.addModule(new DebugUI());
-        this.addModule(new FullBright());
-        this.addModule(new AntiDebuff());
-        this.addModule(new NoCommands());
-        this.addModule(new TargetHUDMod());
-        this.addModule(new Velocity());
-        this.addModule(new Speed());
-        this.addModule(new NoFall());
-        this.addModule(new KillAura());
-        this.addModule(new SpinBot());
-        if (Frost.RELEASE_TYPE.equals(ReleaseType.Development)) this.addModule(new RotationSetter());
+        this.addModule(new Fly(), false);
+        this.addModule(new AutoAttack(), false);
+        this.addModule(new Panic(), false);
+        this.addModule(new AntiBan(), false);//just for fun
+        this.addModule(new NoSlow(), false);
+        this.addModule(new DebugUI(), false);
+        this.addModule(new FullBright(), false);
+        this.addModule(new AntiDebuff(), false);
+        this.addModule(new NoCommands(), false);
+        this.addModule(new TargetHUDMod(), false);
+        this.addModule(new Velocity(), false);
+        this.addModule(new Speed(), false);
+        this.addModule(new NoFall(), false);
+        this.addModule(new KillAura(), false);
 
         this.loadExtern();
 
@@ -108,8 +103,13 @@ public class ModuleManager {
     }
 
 
-    private void addModule(Module m) {
+    private void addModule(Module m, boolean extern) {
+        if (extern) m.setExtern(true);
         modules.add(m);
+    }
+
+    public void addModule(Module m){
+        addModule(m, true);
     }
 
     @EventTarget
@@ -150,6 +150,12 @@ public class ModuleManager {
             if(module.getCategory() == category) arrayList.add(module);
         }
         return arrayList;
+    }
+
+    public void disableAll(){
+        for (Module m : modules){
+            if (m.isState()) m.setState(false);
+        }
     }
     public ArrayList<Category> getAllCategories(){
         return new ArrayList<>(Arrays.asList(Category.values()));

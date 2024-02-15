@@ -12,14 +12,51 @@ public class EntityUtil {
         double zmax = Math.abs(Math.max(player.posZ, target.posZ));
         double zmin = Math.abs(Math.min(player.posZ, target.posZ));
 
-        double a = xmax - xmin;
-        double b = zmax - zmin;
-        double c = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+        double a,b,c;
 
         double yaw;
 
-        yaw = Math.asin(a/c);
 
-        return (float) yaw;
+
+        if (xmin == player.posX){
+            if (zmin == player.posZ){
+                a = xmax - xmin;
+                b = zmax - zmin;
+                c = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+
+                yaw = Math.asin(a/c);
+
+                return (float) -yaw;
+            }
+
+            if (zmax == player.posZ){
+                a = zmax - zmin;
+                b = xmax - xmin;
+                c = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+
+                yaw = Math.asin(a/c);
+                return (float) -(90+yaw);
+            }
+        } else if (xmax == player.posX) {
+            if (zmax == player.posZ){
+                a = xmax - xmin;
+                b = zmax - zmin;
+                c = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+
+                yaw = Math.asin(a/c);
+                return (float) (180-yaw);
+            }
+
+            if (zmin == player.posZ){
+                a = zmax - zmin;
+                b = xmax - xmin;
+                c = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+
+                yaw = Math.asin(a/c);
+                return (float) (90-yaw);
+            }
+        }
+
+        return 0;
     }
 }

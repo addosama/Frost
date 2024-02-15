@@ -1038,6 +1038,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             this.stream.shutdownStream();
             logger.info("Stopping!");
 
+            Frost.INSTANCE.shutdown();
+
             try
             {
                 this.loadWorld((WorldClient)null);

@@ -25,7 +25,8 @@ public class RainbowColor {
         }
 
         rainbow = new Color(
-                Color.HSBtoRGB((float) ((double) Minecraft.getMinecraft().thePlayer.ticksExisted / 50.0
+                Color.HSBtoRGB(
+                        (float) ((double) Minecraft.getMinecraft().thePlayer.ticksExisted / 50.0
                         - Math.sin((double) rainbowTickc / 40.0 * 1.4)) % 1.0f, 1.0f, 1.0f));
     }
 }

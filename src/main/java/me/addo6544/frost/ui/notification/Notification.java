@@ -70,6 +70,9 @@ public class Notification {
                 xPos = xPos -20;
             } else xPos = xPosFinal;
         }
+        if (System.currentTimeMillis()-sTime > 500 && sTime+time-500 > System.currentTimeMillis()){
+            xPos = xPosFinal;
+        }
 
         if (sTime+time-500 < System.currentTimeMillis()){
             xPos = xPos + 20;

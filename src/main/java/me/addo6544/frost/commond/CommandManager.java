@@ -20,6 +20,7 @@ public class CommandManager {
         addCommand(new Cmd_Toggle());
         addCommand(new Cmd_Modules());
         addCommand(new Cmd_Reload());
+        addCommand(new Cmd_Config());
     }
 
     public void addCommand(Command command){

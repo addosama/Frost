@@ -102,6 +102,7 @@ public abstract class EntityLivingBase extends Entity
 
     /** Entity head rotation yaw */
     public float rotationYawHead;
+    public float rotationPitchHead;
 
     /** Entity head rotation yaw at previous tick */
     public float prevRotationYawHead;

@@ -13,19 +13,21 @@ public class Cmd_Reload extends Command {
     public void run(String config) {
         if (config.equalsIgnoreCase("modules")){
             Frost.INSTANCE.init(0);
-        }else if (config.equalsIgnoreCase("commands")){
+        }else if (config.equalsIgnoreCase("configs")){
             Frost.INSTANCE.init(1);
-        }else if (config.equalsIgnoreCase("fonts")){
+        }else if (config.equalsIgnoreCase("commands")){
             Frost.INSTANCE.init(2);
-        }else if (config.equalsIgnoreCase("ui")){
+        }else if (config.equalsIgnoreCase("fonts")){
             Frost.INSTANCE.init(3);
-        }else if (config.equalsIgnoreCase("extern")){
+        }else if (config.equalsIgnoreCase("ui")){
             Frost.INSTANCE.init(4);
+        }else if (config.equalsIgnoreCase("extern")){
+            Frost.INSTANCE.init(5);
         }
         else {
             ChatHelper.addMessage("Invalid Option");
             ChatHelper.addMessage("You can reload these part");
-            ChatHelper.addMessage("modules,commands,fonts,ui,extern");
+            ChatHelper.addMessage("modules,configs,commands,fonts,ui,extern");
         }
     }
 }

@@ -27,6 +27,8 @@ public class Module implements Comparable<Module>{
         private int keyCode;
         private Category category;
 
+        private boolean extern;
+
         protected ModuleSettings settings = new ModuleSettings();
 
         public final Minecraft mc = Minecraft.getMinecraft();
@@ -55,6 +57,7 @@ public class Module implements Comparable<Module>{
         }
 
         public void setState(boolean state) {
+            if (this.state == state) return;
             this.state = state;
             if(state){
                 Enable();
@@ -69,7 +72,15 @@ public class Module implements Comparable<Module>{
             }
         }
 
-        public String getName() {
+    public void setExtern(boolean extern) {
+        this.extern = extern;
+    }
+
+    public boolean isExtern() {
+        return extern;
+    }
+
+    public String getName() {
             return name;
         }
 

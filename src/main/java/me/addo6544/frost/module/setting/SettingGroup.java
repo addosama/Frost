@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SettingGroup extends SettingBase{
-    public final String name;
     protected final ArrayList<Setting> settings;
 
     public SettingGroup(String name, List<Setting> settings){

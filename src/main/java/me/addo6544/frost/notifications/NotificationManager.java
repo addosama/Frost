@@ -13,8 +13,6 @@ import java.util.ArrayList;
 public class NotificationManager {
     public ArrayList<Notification> notifications = new ArrayList<>();
 
-    private ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-
 
     public NotificationManager(){
         Frost.INSTANCE.eventManager.register(this);
@@ -26,6 +24,7 @@ public class NotificationManager {
 
     @EventTarget
     public void onRender(EventRender2D e){
+        ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
         if (!Frost.INSTANCE.loaded) return;
         if (notifications.isEmpty()) return;
 
@@ -34,8 +33,8 @@ public class NotificationManager {
         for (Notification n : notifications){
             if (removeList.contains(n)) continue;
             if (n.isState()){
-                float offSet = (notifications.indexOf(n)-1)*40;
-                n.drawNotification(sr.getScaledHeight()-offSet);
+                float offSet = (notifications.indexOf(n)+1)*40;
+                n.drawNotification((float) (sr.getScaledHeight_double()-offSet));
             } else removeList.add(n);
         }
 

@@ -125,7 +125,7 @@ class ModernHUD{
             Color rb3 = new Color(rb2.getRGB());
             float[] rb3hsb = new float[3];
             Color.RGBtoHSB(rb3.getRed(),rb3.getGreen(),rb3.getBlue(), rb3hsb);
-            rb2 = new Color(Color.HSBtoRGB(rb3hsb[0],rb3hsb[1], (float) (rb3hsb[2]-0.45)));
+            rb2 = new Color(Color.HSBtoRGB(rb3hsb[0],rb3hsb[1], rb3hsb[2]-0.45F));
             RoundedUtil.drawGradientVertical(
                     x + 5,
                     y + 5,

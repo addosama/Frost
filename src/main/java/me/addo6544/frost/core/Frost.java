@@ -2,6 +2,7 @@ package me.addo6544.frost.core;
 
 import me.addo6544.frost.auth.FrostUser;
 import me.addo6544.frost.commond.CommandManager;
+import me.addo6544.frost.config.ConfigManager;
 import me.addo6544.frost.event.Event;
 import me.addo6544.frost.event.EventManager;
 import me.addo6544.frost.event.events.EventInit;
@@ -30,7 +31,7 @@ public enum Frost {
     //Client Info
     public static final String CLIENT_NAME = "Frost";
     public static final float CLIENT_VERSION = 1.6F;
-    public static final String CLIENT_PATH = System.getProperty("user.dir") + "\\frost\\";
+    public static final String CLIENT_PATH = System.getProperty("user.dir") + "\\frost";
     //public static final String CLIENT_WEBSITE = "frostmc.gg";
     public static final ReleaseType RELEASE_TYPE = ReleaseType.Development;
     public static boolean loaded = false;
@@ -39,6 +40,7 @@ public enum Frost {
     public EventManager eventManager;
     public CommandManager commandManager;
     public ModuleManager moduleManager;
+    public ConfigManager configManager;
     public NotificationManager notificationManager;
 
     //UI
@@ -61,12 +63,16 @@ public enum Frost {
         this.eventManager = new EventManager();
         loadState = "Initializing ModuleManager";
         this.moduleManager = new ModuleManager();
+        loadState = "Initializing ConfigManager";
+        this.configManager = new ConfigManager();
         loadState = "Initializing CommandManager";
         this.commandManager = new CommandManager();
         loadState = "Files";
         if (!new File(CLIENT_PATH).exists()){
             new File(CLIENT_PATH).mkdirs();
         }
+        loadState = "Initializing NotificationManager";
+        this.notificationManager = new NotificationManager();
         loadState = "Initializing Extern System";
         ExternSystem.init();
 
@@ -83,13 +89,20 @@ public enum Frost {
         }
 
         while (code == 1){
+            loadState = "Loading Configs";
+            configManager.load();
+
+            if (!loaded) code = code+1; else return;
+        }
+
+        while (code == 2){
             loadState = "Loading Commands";
             commandManager.loadCommands();
 
             if (!loaded) code = code+1; else return;
         }
 
-        while (code == 2){
+        while (code == 3){
             loadState = "Initializing Fonts";
             logger.info("FONTS");
             Fonts.initFonts();
@@ -98,9 +111,8 @@ public enum Frost {
             if (!loaded) code = code+1; else return;
         }
 
-        while (code == 3){
+        while (code == 4){
             loadState = "Loading UI";
-            this.notificationManager = new NotificationManager();
             TargetHUDMod tgHUD = (TargetHUDMod) moduleManager.getModule(TargetHUDMod.class);
             tgHUD.hud = new TargetHUD(5,50);
             debugUI = new TestUI();
@@ -109,7 +121,7 @@ public enum Frost {
             if (!loaded) code = code+1; else return;
         }
 
-        while (code == 4){
+        while (code == 5){
             loadState = "Loading Externs";
             ExternSystem.loadAddons();
 
@@ -120,6 +132,11 @@ public enum Frost {
         Display.setTitle(CLIENT_NAME + " | " + RELEASE_TYPE.getType() + " " + CLIENT_VERSION);
         loaded = true;
         new EventInit(Event.Type.POST).call();
+    }
+
+    public void shutdown(){
+        logger.info("Stopping Client");
+        configManager.save();
     }
 
     public String getLoadState() {

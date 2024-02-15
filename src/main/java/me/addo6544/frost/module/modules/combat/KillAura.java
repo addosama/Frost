@@ -14,6 +14,7 @@ import me.addo6544.frost.module.setting.settings.DoubleSetting;
 import me.addo6544.frost.module.setting.settings.IntegerSetting;
 import me.addo6544.frost.module.setting.settings.ModeSetting;
 import me.addo6544.frost.ui.font.Fonts;
+import me.addo6544.frost.utils.ChatHelper;
 import me.addo6544.frost.utils.DelayHelper;
 import me.addo6544.frost.utils.EntityUtil;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -56,7 +57,7 @@ public class KillAura extends Module {
             "Hit this height of the player",
             0,100,80,1
             );
-    public IntegerSetting playerEyeHeight = new IntegerSetting("Player eyes height", "", 0,100,80);
+    //public IntegerSetting playerEyeHeight = new IntegerSetting("Player eyes height", "", 0,100,80);
 
     public SettingGroup attackOption;
     public BooleanSetting checkRotate = new BooleanSetting("Check Rotate", "Check rotate is valid", false);
@@ -85,7 +86,7 @@ public class KillAura extends Module {
                 minAttackRange,maxAttackRange,swingRange
         ));
         rotationOption = new SettingGroup("Rotation Options", Arrays.asList(
-                rotationMode, rotationBasicHitHeight, playerEyeHeight
+                rotationMode, rotationBasicHitHeight //playerEyeHeight
         ));
         attackOption = new SettingGroup("Attack Options", Arrays.asList(
                 checkRotate,noSwing,switchDelay
@@ -117,7 +118,7 @@ public class KillAura extends Module {
         float pitch;
         float yaw = EntityUtil.getYawToEntity(mc.thePlayer, t);
 
-        a = (playerEyeHeight.getConfigValue()*mc.thePlayer.height) - (rotationBasicHitHeight.getConfigValue()*(t.height/100));
+        a = (mc.thePlayer.getEyeHeight()) - ((rotationBasicHitHeight.getConfigValue()/100)*(t.height));
         b = mc.thePlayer.getDistanceToEntity(t);
         c = Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
 
@@ -128,6 +129,8 @@ public class KillAura extends Module {
 
         e.setYaw(yaw);
         e.setPitch(90-pitch);
+
+        ChatHelper.addMessage("YAW - " + (yaw - mc.thePlayer.rotationYaw));
     }
 
     @EventTarget
@@ -158,6 +161,7 @@ public class KillAura extends Module {
             if (e instanceof EntityMob && targetMobs.getConfigValue()) tgTmp.add((EntityLivingBase) e);
         }
 
+        tgTmp.removeIf(e -> e.getHealth()<=0);
         tgTmp.removeIf(e -> e.isInvisible() && !targetInvisible.getConfigValue());
 
         /***
@@ -190,7 +194,7 @@ public class KillAura extends Module {
             EntityLivingBase tg = null;
 
             if (sortMode.getConfigValue().equalsIgnoreCase("Distance"))
-                targets.sort((o1, o2) -> (int) ((mc.thePlayer.getDistanceToEntity(o1)) - (mc.thePlayer.getDistanceToEntity(o2))));
+                targets.sort((o2, o1) -> (int) ((mc.thePlayer.getDistanceToEntity(o1)) - (mc.thePlayer.getDistanceToEntity(o2))));
 
             tg=targets.get(0);
 
