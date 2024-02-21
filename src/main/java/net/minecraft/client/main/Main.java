@@ -22,6 +22,6 @@ public class Main
 
         if (token.isEmpty()) return;
          ***/
-        Validator.tryStart("token", p_main_0_);
+        Validator.tryStart(p_main_0_);
     }
 }

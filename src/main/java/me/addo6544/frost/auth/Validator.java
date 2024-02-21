@@ -6,10 +6,11 @@ import me.addo6544.frost.core.Frost;
 import javax.swing.*;
 
 public class Validator {
-    public static void tryStart(String token, String[] args){
-        long r = auth(token);
+    public static void tryStart(String[] args){
+        AuthResult result = auth();
+        long r = result.getResult();
         if (r == AuthUtils.AUTH_SUCCEED){
-            Frost.INSTANCE.setUser(new FrostUser(JOptionPane.showInputDialog("Input your Username")));
+            Frost.INSTANCE.setUser(new FrostUser(JOptionPane.showInputDialog("Input your Username"), result.getToken(), getRank(result.getToken())));
             FrostLoader.run(args);
         } else if (r == AuthUtils.AUTH_FAILED) {
             JOptionPane.showMessageDialog(null, "AUTH FAILED!");
@@ -18,7 +19,11 @@ public class Validator {
         }
     }
 
-    public static long auth(String token){
-        return AuthUtils.AUTH_SUCCEED;
+    public static AuthResult auth(){
+        return new AuthResult(AuthUtils.AUTH_SUCCEED, "abc");
+    }
+
+    public static UserRanks getRank(String userToken){
+        return UserRanks.FrostDeveloper;
     }
 }

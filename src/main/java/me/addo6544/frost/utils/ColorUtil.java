@@ -105,7 +105,7 @@ public enum ColorUtil {
 
      */
 
-    public static Color getColorLighter(Color color, int v){
+    public static Color getColorLighterRGB(Color color, int v){
         int r,g,b;
 
         r = color.getRed();
@@ -123,7 +123,29 @@ public enum ColorUtil {
         return new Color(r,g,b);
     }
 
-    public static Color getColorDarker(Color color, int v){
+    public static Color getColorLighterHSB(Color color, int percent){
+        float p = percent/100f;
+        if (p > 1 || p < 0) return new Color(0,0,0,0);
+        float[] hsb = getColorHSB(color);
+        return new Color(
+                hsb[0],
+                hsb[1],
+                hsb[2] + percent > 1 ? 1 : hsb[2] + percent
+        );
+    }
+
+    public static Color getClientDarkerHSB(Color color, int percent){
+        float p = percent/100f;
+        if (p > 1 || p < 0) return new Color(0,0,0,0);
+        float[] hsb = getColorHSB(color);
+        return new Color(
+                hsb[0],
+                hsb[1],
+                hsb[2] - percent < 0 ? 0 : hsb[2] - percent
+        );
+    }
+
+    public static Color getColorDarkerRGB(Color color, int v){
         int r,g,b;
 
         r = color.getRed();

@@ -8,25 +8,72 @@ import net.minecraft.client.Minecraft;
 import java.awt.*;
 
 public class RainbowColor {
+    private int rainbowTick;
 
-    private Color rainbow;
-    private int rainbowTickc;
+    private float s;
+    private float b;
+
+    private boolean state = false;
+
+    public RainbowColor(float s, float b){
+        this.s = s;
+        this.b = b;
+        rainbowTick = 0;
+    }
 
     public RainbowColor(){
-        rainbow = new Color(255,0,0);
-        rainbowTickc = 0;
+        this.s = 1;
+        this.b = 1;
+        rainbowTick = 0;
+    }
+
+    public void register(){
         Frost.INSTANCE.eventManager.register(this);
+        state = true;
+    }
+
+    public void unregister(){
+        state = false;
+        Frost.INSTANCE.eventManager.unregister(this);
     }
 
     @EventTarget
     public void onUpdate(EventUpdate eventUpdate){
-        if (++rainbowTickc > 100) {
-            rainbowTickc = 0;
-        }
+    }
 
-        rainbow = new Color(
+    public void updateRainbowTick(){
+        ++rainbowTick;
+        if (rainbowTick > 100) rainbowTick = 0;
+    }
+
+    public Color getRainbow(int index){
+        int rbT = rainbowTick;
+        rbT = rbT + index;
+        if (rbT > 100) rbT = rbT - 100;
+
+        return new Color(
                 Color.HSBtoRGB(
                         (float) ((double) Minecraft.getMinecraft().thePlayer.ticksExisted / 50.0
-                        - Math.sin((double) rainbowTickc / 40.0 * 1.4)) % 1.0f, 1.0f, 1.0f));
+                                - Math.sin((double) rbT / 40.0 * 1.4)) % 1.0f, s, b));
+    }
+
+    public float getS() {
+        return s;
+    }
+
+    public float getB() {
+        return b;
+    }
+
+    public void setS(float s) {
+        this.s = s;
+    }
+
+    public void setB(float b) {
+        this.b = b;
+    }
+
+    public boolean isState() {
+        return state;
     }
 }

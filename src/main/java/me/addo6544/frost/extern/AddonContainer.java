@@ -25,7 +25,7 @@ public class AddonContainer {
             mainClass = urlClassLoader.loadClass("FrostExtern");
             //创建对象实例
             Object instance = mainClass.newInstance();
-            //获取实例当中的方法名为show，参数只有一个且类型为string的public方法
+
             Method initMethod = mainClass.getMethod("init");
             //传入实例以及方法参数信息执行这个方法
             result = (boolean) initMethod.invoke(instance);

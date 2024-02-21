@@ -1,15 +1,43 @@
 package me.addo6544.frost.utils;
 
 public class DelayHelper {
-    private static long startTick;
+    private long startTick = 0;
+    private long ms = 0;
+    private boolean delaying;
 
-    public static boolean delay(int tick){
-        if (startTick == 0){
+    public DelayHelper(){
+
+    }
+
+    public boolean delay(){
+        if (delaying) {
+            if (startTick+ms == System.currentTimeMillis()){
+                delaying = false;
+                return true;
+            }
+            return false;
+        } else {
+            delaying = true;
             startTick = System.currentTimeMillis();
-        }else if (startTick + tick == System.currentTimeMillis()){
-            startTick = 0;
-            return true;
+            if (startTick+ms == System.currentTimeMillis()){
+                delaying = false;
+                return true;
+            }
+            return false;
         }
-        return false;
+    }
+
+    public void reset(long millisecond){
+        startTick = 0;
+        ms = millisecond;
+        delaying = false;
+    }
+
+    public boolean isDelaying() {
+        return delaying;
+    }
+
+    public long getDelay() {
+        return ms;
     }
 }

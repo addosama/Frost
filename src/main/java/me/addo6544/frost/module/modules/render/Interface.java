@@ -51,6 +51,7 @@ public class Interface extends Module {
         }else if (style.getConfigValue().equalsIgnoreCase("Modern")){
             ModernHUD.drawWatermark(rainbowC.getConfigValue(), radius.getConfigValue().floatValue());
             ModernHUD.drawArraylist(rainbowC.getConfigValue());
+            ModernHUD.drawUserInfo();
         } else if (style.getConfigValue().equalsIgnoreCase("Power")) {
             PowerHUD.drawWatermark();
             PowerHUD.drawArraylist();
@@ -194,7 +195,21 @@ class ModernHUD{
             rb2 = rainbow;
         }
     }
+
+    public static void drawUserInfo(){
+        ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
+
+        FR f = Fonts.HMRegular18;
+        float totalWidth1 = f.getStringWidth(Frost.RELEASE_TYPE.getType() + " - " + Frost.CLIENT_VERSION);
+        float totalWidth2 = f.getStringWidth(Frost.INSTANCE.user.username);
+
+        f.drawStringWithGudShadow(Frost.RELEASE_TYPE.getType() + " - " + Frost.CLIENT_VERSION, sr.getScaledWidth()-2-totalWidth1, sr.getScaledHeight()-2-f.FONT_HEIGHT, new Color(190, 190, 190).getRGB());
+        f.drawStringWithSuperShadow(Frost.INSTANCE.user.username, sr.getScaledWidth()-2-totalWidth2, sr.getScaledHeight()-2-f.FONT_HEIGHT-2-f.FONT_HEIGHT, Frost.INSTANCE.user.userRank.getColor().getRGB());
+
+    }
 }
+
+
 class PowerHUD{
     public static void drawWatermark(){
         FR l42 = Fonts.HMLight42;

@@ -25,6 +25,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class KillAura extends Module {
@@ -66,6 +67,7 @@ public class KillAura extends Module {
 
 
     private TargetHUDMod tghud;
+    private final DelayHelper delayHelper = new DelayHelper();
 
     public ArrayList<EntityLivingBase> targets = new ArrayList<EntityLivingBase>();
 
@@ -104,6 +106,7 @@ public class KillAura extends Module {
     public void onUpdate(EventUpdate e){
         processEntities(mc.theWorld.loadedEntityList);
         if (targets.isEmpty()) return;
+        sortTargets();
         if (checkRotate.getConfigValue() && !canAttack()) return;
         attack();
     }
@@ -130,10 +133,11 @@ public class KillAura extends Module {
         e.setYaw(yaw);
         e.setPitch(90-pitch);
 
-        ChatHelper.addMessage("YAW - " + (yaw - mc.thePlayer.rotationYaw));
+        //ChatHelper.addMessage("YAW - " + (yaw - mc.thePlayer.rotationYaw));
     }
 
-    @EventTarget
+    /***
+    EventTarget
     public void onRender(EventRender2D e){
         Fonts.HMRegular12.drawString("YAW - " + y, 5, 45, -1);
         Fonts.HMRegular12.drawString("PITCH - " + p, 5, 45+ Fonts.HMRegular12.FONT_HEIGHT, -1);
@@ -141,14 +145,15 @@ public class KillAura extends Module {
         Fonts.HMRegular12.drawString("B - " + b, 5, 45+ Fonts.HMRegular12.FONT_HEIGHT+ Fonts.HMRegular12.FONT_HEIGHT+ Fonts.HMRegular12.FONT_HEIGHT, -1);
         Fonts.HMRegular12.drawString("C - " + c, 5, 45+ Fonts.HMRegular12.FONT_HEIGHT+ Fonts.HMRegular12.FONT_HEIGHT+ Fonts.HMRegular12.FONT_HEIGHT+ Fonts.HMRegular12.FONT_HEIGHT, -1);
     }
+     ***/
 
     private boolean canAttack(){
         return true;
     }
 
-    private void processEntities(List<Entity> entities){
+    private void processEntities(List<Entity> entities) {
         ArrayList<EntityLivingBase> tgTmp = new ArrayList<>();
-        for (Entity e : entities){
+        for (Entity e : entities) {
             if (e.isDead) continue;
 
             float d = mc.thePlayer.getDistanceToEntity(e);
@@ -156,27 +161,35 @@ public class KillAura extends Module {
             if (d > maxAttackRange.getConfigValue() && d > swingRange.getConfigValue()) continue;
             if (d < minAttackRange.getConfigValue()) continue;
 
-            if (e instanceof AbstractClientPlayer && targetPlayers.getConfigValue() && !e.equals(mc.thePlayer)) tgTmp.add((EntityLivingBase) e);
+            if (e instanceof AbstractClientPlayer && targetPlayers.getConfigValue() && !e.equals(mc.thePlayer))
+                tgTmp.add((EntityLivingBase) e);
             if (e instanceof EntityAnimal && targetAnimals.getConfigValue()) tgTmp.add((EntityLivingBase) e);
             if (e instanceof EntityMob && targetMobs.getConfigValue()) tgTmp.add((EntityLivingBase) e);
         }
 
-        tgTmp.removeIf(e -> e.getHealth()<=0);
+        tgTmp.removeIf(e -> e.getHealth() <= 0);
         tgTmp.removeIf(e -> e.isInvisible() && !targetInvisible.getConfigValue());
 
         /***
-        for (EntityLivingBase e : targets){
-            if (!tgTmp.contains(e)){
-                targets.remove(e);
-                if (e instanceof AbstractClientPlayer) tghud.getHud().setTarget(null);
-            }
-        }
+         for (EntityLivingBase e : targets){
+         if (!tgTmp.contains(e)){
+         targets.remove(e);
+         if (e instanceof AbstractClientPlayer) tghud.getHud().setTarget(null);
+         }
+         }
          ***/
         targets.clear();
         tghud.getHud().setTarget(null);
 
         targets.addAll(tgTmp);
     }
+
+    public void sortTargets(){
+        if (sortMode.getConfigValue().equalsIgnoreCase("Distance"))
+            targets.sort((o1, o2) -> (int) ((mc.thePlayer.getDistanceToEntity(o1)) - (mc.thePlayer.getDistanceToEntity(o2))));
+    }
+
+    int attacked = 1;
 
     private void attack(){
         if (mode.getConfigValue().equalsIgnoreCase("Multi")) {
@@ -191,12 +204,8 @@ public class KillAura extends Module {
                 }
             }
         } else if (mode.getConfigValue().equalsIgnoreCase("Single")){
-            EntityLivingBase tg = null;
 
-            if (sortMode.getConfigValue().equalsIgnoreCase("Distance"))
-                targets.sort((o2, o1) -> (int) ((mc.thePlayer.getDistanceToEntity(o1)) - (mc.thePlayer.getDistanceToEntity(o2))));
-
-            tg=targets.get(0);
+            EntityLivingBase tg = targets.get(0);
 
 
             if (tg instanceof AbstractClientPlayer)
@@ -208,28 +217,33 @@ public class KillAura extends Module {
                 if (!noSwing.getConfigValue()) mc.thePlayer.swingItem();
             }
         } else if (mode.getConfigValue().equalsIgnoreCase("Switch")) {
-                EntityLivingBase tg = null;
-                int attacked = 0;
 
-                if (sortMode.getConfigValue().equalsIgnoreCase("Distance"))
-                    targets.sort((o1, o2) -> (int) ((mc.thePlayer.getDistanceToEntity(o1)) - (mc.thePlayer.getDistanceToEntity(o2))));
-
-                if (attacked != 0 && DelayHelper.delay(switchDelay.getConfigValue())){
-                    tg = targets.get(attacked);
-                    attacked = attacked + 1;
-                    if (attacked > targets.size()) attacked = 0;
-                }else {
-                    tg = targets.get(attacked);
+            //switch code
+            if (delayHelper.getDelay() == switchDelay.getConfigValue()){
+                if (delayHelper.delay()){
+                    Collections.swap(targets, 0, attacked-1);
+                    attacked++;
+                    if (attacked >= targets.size()){
+                        sortTargets();
+                        attacked = 1;
+                    }
+                    delayHelper.reset(switchDelay.getConfigValue());
                 }
+            } else {
+                delayHelper.reset(switchDelay.getConfigValue());
+            }
 
-                if (tg instanceof AbstractClientPlayer)
-                    tghud.getHud().setTarget((AbstractClientPlayer) tg);
-                if (mc.thePlayer.getDistanceToEntity(tg) <= swingRange.getConfigValue() && !noSwing.getConfigValue())
-                    mc.thePlayer.swingItem();
-                if (mc.thePlayer.getDistanceToEntity(tg) <= maxAttackRange.getConfigValue()) {
-                    mc.playerController.attackEntity(mc.thePlayer, tg);
-                    if (!noSwing.getConfigValue()) mc.thePlayer.swingItem();
-                }
+
+            EntityLivingBase tg = targets.get(0);
+
+            if (tg instanceof AbstractClientPlayer)
+                tghud.getHud().setTarget((AbstractClientPlayer) tg);
+            if (mc.thePlayer.getDistanceToEntity(tg) <= swingRange.getConfigValue() && !noSwing.getConfigValue())
+                mc.thePlayer.swingItem();
+            if (mc.thePlayer.getDistanceToEntity(tg) <= maxAttackRange.getConfigValue()) {
+                mc.playerController.attackEntity(mc.thePlayer, tg);
+                if (!noSwing.getConfigValue()) mc.thePlayer.swingItem();
+            }
         }
     }
 
