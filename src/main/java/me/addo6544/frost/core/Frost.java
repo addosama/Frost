@@ -30,7 +30,7 @@ public enum Frost {
 
     //Client Info
     public static final String CLIENT_NAME = "Frost";
-    public static final float CLIENT_VERSION = 1.6F;
+    public static final float CLIENT_VERSION = 1.7F;
     public static final String CLIENT_PATH = System.getProperty("user.dir") + "\\frost";
     //public static final String CLIENT_WEBSITE = "frostmc.gg";
     public static final ReleaseType RELEASE_TYPE = ReleaseType.Development;
