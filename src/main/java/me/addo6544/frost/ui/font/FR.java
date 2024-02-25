@@ -16,7 +16,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class FR {
     public float FONT_HEIGHT = 0;
-    private final CFont unicodeFont;
+    private CFont unicodeFont;
     private final int[] colorCodes = new int[32];
 
     private float kerning;
@@ -55,6 +55,10 @@ public class FR {
             this.colorCodes[i] = (red & 255) << 16 | (green & 255) << 8 | blue & 255;
         }
         this.FONT_HEIGHT = this.getHeight("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+    }
+
+    public FR() {
+
     }
 
     private Font getFont(String fontName, int fontType, int size) {
@@ -238,7 +242,7 @@ public class FR {
     }
 
     public void drawCenteredStringWithShadow(String text, float x, float y, int color) {
-        drawCenteredString(StringUtils.stripControlCodes(text), x + 0.5F, y + 0.5F, 0xFF000000, true);
+        drawCenteredString(StringUtils.stripControlCodes(text), x + 0.5F, y + 0.5F, this.getShadowColor(color).getRGB(), true);
         drawCenteredString(text, x, y, color, true);
     }
 

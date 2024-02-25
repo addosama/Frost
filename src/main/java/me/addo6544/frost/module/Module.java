@@ -20,28 +20,31 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 public class Module implements Comparable<Module>{
-        protected Logger logger;
-        private boolean state;
-        private String name;
-        private String description;
-        private int keyCode;
-        private Category category;
+    protected Logger logger;
+    private boolean state;
+    private String name;
+    private String description;
+    private int keyCode;
+    private Category category;
 
-        private boolean extern;
+    private int about;
 
-        protected ModuleSettings settings = new ModuleSettings();
 
-        public final Minecraft mc = Minecraft.getMinecraft();
+    private boolean extern;
 
-        public Module(String name, String description, int keyCode, Category category) {
-            this.state = false;
-            this.name = name;
-            this.description = description;
-            this.keyCode = keyCode;
-            this.category = category;
-            //this.settings = new ModuleSettings();
-            this.logger = SimpleConsoleFormatter.installFormatter(Logger.getLogger(name));
-        }
+    protected ModuleSettings settings = new ModuleSettings();
+
+    public final Minecraft mc = Minecraft.getMinecraft();
+
+    public Module(String name, String description, int keyCode, Category category) {
+        this.state = false;
+        this.name = name;
+        this.description = description;
+        this.keyCode = keyCode;
+        this.category = category;
+        //this.settings = new ModuleSettings();
+        this.logger = SimpleConsoleFormatter.installFormatter(Logger.getLogger(name));
+    }
 
     public Module(String name, String description, Category category) {
         this.state = false;
@@ -52,25 +55,25 @@ public class Module implements Comparable<Module>{
         this.logger = SimpleConsoleFormatter.installFormatter(Logger.getLogger(name));
     }
 
-        public boolean isState() {
-            return state;
-        }
+    public boolean isState() {
+        return state;
+    }
 
-        public void setState(boolean state) {
-            if (this.state == state) return;
-            this.state = state;
-            if(state){
-                Enable();
-                Frost.INSTANCE.notificationManager.newNotification(
-                        new Notification("Module Toggled", name + " enabled", Notification.NColors.GREEN)
-                );
-            }else {
-                Disable();
-                Frost.INSTANCE.notificationManager.newNotification(
-                        new Notification("Module Toggled", name + " disabled", Notification.NColors.RED)
-                );
-            }
+    public void setState(boolean state) {
+        if (this.state == state) return;
+        this.state = state;
+        if(state){
+            Enable();
+            Frost.INSTANCE.notificationManager.newNotification(
+                    new Notification("Module Toggled", name + " enabled", Notification.NColors.GREEN)
+            );
+        }else {
+            Disable();
+            Frost.INSTANCE.notificationManager.newNotification(
+                    new Notification("Module Toggled", name + " disabled", Notification.NColors.RED)
+            );
         }
+    }
 
     public void setExtern(boolean extern) {
         this.extern = extern;
@@ -159,6 +162,47 @@ public class Module implements Comparable<Module>{
             }
 
             return null;
+    }
+
+    public void setAbout(
+            boolean showInArrayList,
+            boolean saveSettings,
+            boolean loadFromSettings,
+            boolean toggleNotification
+    ) {
+        int i = 0;
+        if (showInArrayList) i = i+1;
+        if (saveSettings) i = i+10;
+        if (loadFromSettings) i = i+100;
+        if (toggleNotification) i = i+1000;
+    }
+
+    public void setAboutINT(int about) {
+        this.about = about;
+    }
+
+    public int getAboutINT() {
+        return about;
+    }
+
+    public boolean isShowInArraylist(){
+        String[] s = String.valueOf(about).split("");
+        return Integer.getInteger(s[s.length-1]) == 1;
+    }
+
+    public boolean isSaveSettings(){
+        String[] s = String.valueOf(about).split("");
+        return Integer.getInteger(s[s.length-2]) == 1;
+    }
+
+    public boolean isLoadFromSettings(){
+        String[] s = String.valueOf(about).split("");
+        return Integer.getInteger(s[s.length-3]) == 1;
+    }
+
+    public boolean isToggleNotification(){
+        String[] s = String.valueOf(about).split("");
+        return Integer.getInteger(s[s.length-4]) == 1;
     }
 
     public Setting getSetting(String name){

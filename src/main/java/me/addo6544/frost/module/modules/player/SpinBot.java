@@ -2,13 +2,10 @@ package me.addo6544.frost.module.modules.player;
 
 import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventMotion;
-import me.addo6544.frost.event.events.EventUpdate;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
 import me.addo6544.frost.module.setting.settings.DoubleSetting;
-import me.addo6544.frost.utils.PacketSender;
 import me.addo6544.frost.utils.RotationUtil;
-import net.minecraft.network.play.client.C03PacketPlayer;
 
 public class SpinBot extends Module {
     public DoubleSetting p = new DoubleSetting("Pitch", "", 0,360,180);

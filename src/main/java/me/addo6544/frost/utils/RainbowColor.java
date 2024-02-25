@@ -39,6 +39,7 @@ public class RainbowColor {
 
     @EventTarget
     public void onUpdate(EventUpdate eventUpdate){
+        updateRainbowTick();
     }
 
     public void updateRainbowTick(){

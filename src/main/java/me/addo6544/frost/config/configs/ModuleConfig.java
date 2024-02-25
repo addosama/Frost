@@ -52,6 +52,9 @@ public class ModuleConfig extends Config {
                     if (modJsonObject.has("keybind")){
                         module.setKeyCode(modJsonObject.get("keybind").getAsInt());
                     }
+                    if (modJsonObject.has("about")){
+                        module.setAboutINT(modJsonObject.get("about").getAsInt());
+                    }
                     if (modJsonObject.has("settings")){
                         JsonObject modSetJsonO = modJsonObject.get("settings").getAsJsonObject();
                         ModuleSettings ms = module.getSettings();
@@ -200,6 +203,7 @@ public class ModuleConfig extends Config {
             JsonObject modJsonObject = new JsonObject();
             modJsonObject.addProperty("state", module.isState());
             modJsonObject.addProperty("keybind", module.getKeyCode());
+            modJsonObject.addProperty("about", module.getAboutINT());
 
             JsonObject modSetJsonO = new JsonObject();
 

@@ -7,8 +7,10 @@ import java.awt.*;
 import java.io.InputStream;
 
 public class Fonts {
+    private static final boolean allChar = false;
     public static FontRenderer mc = Minecraft.getMinecraft().fontRendererObj;
     public static FR HMBlack18;
+    public static FR HMBlack24;
     public static FR HMRegular18;
     public static FR HMLight42;
     public static FR HMLight18;
@@ -18,15 +20,17 @@ public class Fonts {
     public static FR HMBlack36;
 
 
+
     public static void initFonts(){
-        HMBlack18 = new FR("HM_BLACK.ttf", Font.BOLD, 18, 7, true);
-        HMRegular18 = new FR("HM_REGULAR.ttf", Font.PLAIN, 18, 7, true);
-        HMLight42 = new FR("HM_LIGHT.ttf", Font.PLAIN, 42,7,true);
-        HMLight18 = new FR("HM_LIGHT.ttf", Font.PLAIN, 18,7,true);
-        HMBold24 = new FR("HM_BOLD.ttf", Font.PLAIN, 24, 7, true);
-        HMBold18 = new FR("HM_BOLD.ttf", Font.PLAIN, 18, 7, true);
-        HMRegular12 = new FR("HM_REGULAR.ttf", Font.PLAIN, 12, 7, true);
-        HMBlack36 = new FR("HM_BLACK.ttf", Font.PLAIN, 36, 7, true);
+        HMBlack18 = new FR("HM_BLACK.ttf", Font.PLAIN, 18, 7, allChar);
+        HMBlack24 = new FR("HM_BLACK.ttf", Font.PLAIN, 24, 7, allChar);
+        HMRegular18 = new FR("HM_REGULAR.ttf", Font.PLAIN, 18, 7, allChar);
+        HMLight42 = new FR("HM_LIGHT.ttf", Font.PLAIN, 42,7,allChar);
+        HMLight18 = new FR("HM_LIGHT.ttf", Font.PLAIN, 18,7,allChar);
+        HMBold24 = new FR("HM_BOLD.ttf", Font.PLAIN, 24, 7, allChar);
+        HMBold18 = new FR("HM_BOLD.ttf", Font.PLAIN, 18, 7, allChar);
+        HMRegular12 = new FR("HM_REGULAR.ttf", Font.PLAIN, 12, 7, allChar);
+        HMBlack36 = new FR("HM_BLACK.ttf", Font.PLAIN, 36, 7, allChar);
     }
 
     public static Font getFont(String name, int size) {

@@ -1,6 +1,6 @@
 package net.minecraft.client.main;
 
-import me.addo6544.frost.auth.Validator;
+import frost.loader.FrostLoader;
 
 public class Main
 {
@@ -22,6 +22,7 @@ public class Main
 
         if (token.isEmpty()) return;
          ***/
-        Validator.tryStart(p_main_0_);
+
+        FrostLoader.run(p_main_0_);
     }
 }

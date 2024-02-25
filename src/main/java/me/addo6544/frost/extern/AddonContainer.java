@@ -6,8 +6,8 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 public class AddonContainer {
-    URLClassLoader urlClassLoader = null;
-    Class<?> mainClass = null;
+    URLClassLoader urlClassLoader;
+    Class<?> mainClass;
     String path;
 
     public static String id;
@@ -21,8 +21,6 @@ public class AddonContainer {
         try {
             //通过URLClassLoader加载外部jar
             urlClassLoader = new URLClassLoader(new URL[]{new URL(path)});
-            //获取外部jar里面的具体类对象
-            mainClass = urlClassLoader.loadClass("FrostExtern");
             //创建对象实例
             Object instance = mainClass.newInstance();
 

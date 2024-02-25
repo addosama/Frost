@@ -565,7 +565,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         this.checkGLError("Post startup");
         this.ingameGUI = new GuiIngame(this);
 
-        Frost.INSTANCE.preInit();
+        //Frost.INSTANCE.preInit();
 
         if (this.serverName != null)
         {

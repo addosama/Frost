@@ -203,8 +203,8 @@ class ModernHUD{
         float totalWidth1 = f.getStringWidth(Frost.RELEASE_TYPE.getType() + " - " + Frost.CLIENT_VERSION);
         float totalWidth2 = f.getStringWidth(Frost.INSTANCE.user.username);
 
-        f.drawStringWithGudShadow(Frost.RELEASE_TYPE.getType() + " - " + Frost.CLIENT_VERSION, sr.getScaledWidth()-2-totalWidth1, sr.getScaledHeight()-2-f.FONT_HEIGHT, new Color(190, 190, 190).getRGB());
-        f.drawStringWithSuperShadow(Frost.INSTANCE.user.username, sr.getScaledWidth()-2-totalWidth2, sr.getScaledHeight()-2-f.FONT_HEIGHT-2-f.FONT_HEIGHT, Frost.INSTANCE.user.userRank.getColor().getRGB());
+        f.drawStringWithShadow(Frost.RELEASE_TYPE.getType() + " - " + Frost.CLIENT_VERSION, sr.getScaledWidth()-2-totalWidth1, sr.getScaledHeight()-2-f.FONT_HEIGHT, new Color(190, 190, 190).getRGB());
+        f.drawStringWithShadow(Frost.INSTANCE.user.username, sr.getScaledWidth()-2-totalWidth2, sr.getScaledHeight()-2-f.FONT_HEIGHT-2-f.FONT_HEIGHT, Frost.INSTANCE.user.userRank.getColor().getRGB());
 
     }
 }

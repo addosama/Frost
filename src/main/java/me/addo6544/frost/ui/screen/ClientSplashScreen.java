@@ -21,10 +21,11 @@ public class ClientSplashScreen extends GuiScreen {
     private int serverPort;
     private FR bb42;
     private FR r14;
+
+    private static boolean shouldStart = true;
+
     public ClientSplashScreen(){
         connect = false;
-
-        Frost.INSTANCE.eventManager.register(this);
     }
 
     public ClientSplashScreen(Minecraft mcIn, String serverName, int serverPort){
@@ -32,9 +33,6 @@ public class ClientSplashScreen extends GuiScreen {
         this.mcIn = mcIn;
         this.servername = serverName;
         this.serverPort = serverPort;
-
-
-        Frost.INSTANCE.eventManager.register(this);
     }
 
     @Override
@@ -48,9 +46,9 @@ public class ClientSplashScreen extends GuiScreen {
         if (Frost.INSTANCE.loaded){
             Fonts.initFonts();
             if (connect) {
-                mc.displayGuiScreen(new GuiConnecting(new ClientMainMenu(), mcIn, servername, serverPort));
+                mc.displayGuiScreen(new ClientLoginScreen(mcIn, servername, serverPort));
             } else {
-                mc.displayGuiScreen(new ClientMainMenu());
+                mc.displayGuiScreen(new ClientLoginScreen());
             }
             Frost.INSTANCE.eventManager.unregister(this);
             return;
@@ -60,6 +58,11 @@ public class ClientSplashScreen extends GuiScreen {
         RenderUtil.drawRect(0,0,0,0,new Color(0,0,0).getRGB());
         bb42.drawCenteredString("Starting " + Frost.CLIENT_NAME, width/2, (height/2)-bb42.FONT_HEIGHT-1, -1, false);
         r14.drawCenteredString(Frost.INSTANCE.getLoadState(), width/2, (height/2)+1+r14.FONT_HEIGHT, -1, false);
+
+        if (shouldStart){
+            shouldStart = false;
+            Frost.INSTANCE.preInit();
+        }
     }
 
 

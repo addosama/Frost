@@ -1,8 +1,23 @@
 package me.addo6544.frost.utils;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.MessageDigest;
 
 public class FileUtils {
+    /***
+    public static String getSHA256(Path path) throws Exception {
+        String s = Base64Util.encryptBASE64(Files.readAllBytes(path));
+        StringBuilder builder = new StringBuilder();
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        byte[] encrypted = messageDigest.digest(s.getBytes("UTF-8"));
+        for (byte b : encrypted){
+            builder.append(String.format("%02x", b));
+        }
+        return builder.toString();
+    }
+     ***/
 
     public static String readFile(File file) {
         StringBuilder stringBuilder = new StringBuilder();

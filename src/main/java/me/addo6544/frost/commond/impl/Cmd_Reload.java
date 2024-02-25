@@ -2,6 +2,7 @@ package me.addo6544.frost.commond.impl;
 
 import me.addo6544.frost.commond.Command;
 import me.addo6544.frost.core.Frost;
+import me.addo6544.frost.extern.ExternSystem;
 import me.addo6544.frost.utils.ChatHelper;
 
 public class Cmd_Reload extends Command {
@@ -22,7 +23,7 @@ public class Cmd_Reload extends Command {
         }else if (config.equalsIgnoreCase("ui")){
             Frost.INSTANCE.init(4);
         }else if (config.equalsIgnoreCase("extern")){
-            Frost.INSTANCE.init(5);
+            ExternSystem.reloadAddons();
         }
         else {
             ChatHelper.addMessage("Invalid Option");
