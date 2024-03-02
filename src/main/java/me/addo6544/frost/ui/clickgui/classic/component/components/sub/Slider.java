@@ -1,9 +1,9 @@
-package me.addo6544.frost.ui.clickgui.component.components.sub;
+package me.addo6544.frost.ui.clickgui.classic.component.components.sub;
 
 import me.addo6544.frost.module.setting.Setting;
 import me.addo6544.frost.module.setting.settings.NumberSetting;
-import me.addo6544.frost.ui.clickgui.component.Component;
-import me.addo6544.frost.ui.clickgui.component.components.Button;
+import me.addo6544.frost.ui.clickgui.classic.component.Component;
+import me.addo6544.frost.ui.clickgui.classic.component.components.Button;
 import me.addo6544.frost.ui.font.Fonts;
 import net.minecraft.util.EnumChatFormatting;
 

@@ -1,4 +1,4 @@
-package me.addo6544.frost.ui.clickgui.component;
+package me.addo6544.frost.ui.clickgui.classic.component;
 
 /**
  *  Made by Pandus1337

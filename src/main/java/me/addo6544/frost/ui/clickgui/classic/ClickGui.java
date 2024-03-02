@@ -1,11 +1,11 @@
-package me.addo6544.frost.ui.clickgui;
+package me.addo6544.frost.ui.clickgui.classic;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import me.addo6544.frost.module.Category;
-import me.addo6544.frost.ui.clickgui.component.Component;
-import me.addo6544.frost.ui.clickgui.component.Frame;
+import me.addo6544.frost.ui.clickgui.classic.component.Component;
+import me.addo6544.frost.ui.clickgui.classic.component.Frame;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;

@@ -1,4 +1,4 @@
-package me.addo6544.frost.ui.clickgui.component;
+package me.addo6544.frost.ui.clickgui.classic.component;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
-import me.addo6544.frost.ui.clickgui.component.components.Button;
+import me.addo6544.frost.ui.clickgui.classic.component.components.Button;
 import me.addo6544.frost.ui.font.Fonts;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;

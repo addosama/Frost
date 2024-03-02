@@ -21,7 +21,6 @@ import me.addo6544.frost.module.modules.player.AntiDebuff;
 import me.addo6544.frost.module.modules.player.NoFall;
 import me.addo6544.frost.module.modules.render.*;
 import me.addo6544.frost.module.modules.world.AntiBan;
-import me.addo6544.frost.module.setting.Setting;
 import me.addo6544.frost.module.setting.SettingBase;
 import me.addo6544.frost.module.setting.SettingGroup;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
@@ -40,7 +39,7 @@ public class ModuleManager {
     }
 
     public void loadMods() {
-        this.addModule(new Interface(), false);
+        this.addModule(new HUD(), false);
         this.addModule(new CGuiM(), false);
         this.addModule(new Sprint(), false);
         //this.addModule(new FastLiquid());
@@ -49,7 +48,6 @@ public class ModuleManager {
         this.addModule(new Panic(), false);
         this.addModule(new AntiBan(), false);//just for fun
         this.addModule(new NoSlow(), false);
-        this.addModule(new DebugUI(), false);
         this.addModule(new FullBright(), false);
         this.addModule(new AntiDebuff(), false);
         this.addModule(new NoCommands(), false);

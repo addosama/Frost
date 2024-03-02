@@ -23,7 +23,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Interface extends Module {
+public class HUD extends Module {
 
     public ModeSetting style = new ModeSetting("Style", "Interface Style", "Modern",
             Arrays.asList(
@@ -36,8 +36,8 @@ public class Interface extends Module {
     public DoubleSetting radius = new DoubleSetting("Radius", "For modern style", 0D, 15D, 8D);
     public BooleanSetting rainbowC = new BooleanSetting("Rainbow", "rainbow color", false);
 
-    public Interface(){
-        super("Interface", "Client HUD", Keyboard.KEY_H, Category.Render);
+    public HUD(){
+        super("HUD", "", Category.Render);
         this.settings.addSetting(style);
         this.settings.addSetting(rainbowC);
         this.settings.addSetting(radius);

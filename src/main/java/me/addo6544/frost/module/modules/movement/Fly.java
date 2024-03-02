@@ -20,7 +20,7 @@ public class Fly extends Module {
             ));
 
     public Fly(){
-        super("Fly", "Fly like a bird", Keyboard.KEY_5, Category.Movement);
+        super("Fly", "Fly like a bird", Category.Movement);
         this.settings.addSetting(mode);
     }
 
