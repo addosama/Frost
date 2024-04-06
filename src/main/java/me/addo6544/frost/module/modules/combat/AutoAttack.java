@@ -1,21 +1,13 @@
 package me.addo6544.frost.module.modules.combat;
 
-import me.addo6544.frost.core.Frost;
 import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventUpdate;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
-import me.addo6544.frost.module.modules.render.TargetHUDMod;
-import me.addo6544.frost.module.setting.settings.BooleanSetting;
-import me.addo6544.frost.module.setting.settings.DoubleSetting;
-import me.addo6544.frost.ui.hud.target.TargetHUD;
-import net.minecraft.client.entity.AbstractClientPlayer;
+import me.addo6544.frost.setting.settings.BooleanSetting;
+import me.addo6544.frost.setting.settings.DoubleSetting;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemSword;
-import net.minecraft.network.play.client.C03PacketPlayer;
-import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
-import net.minecraft.network.play.client.C0BPacketEntityAction;
 
 import java.util.ArrayList;
 

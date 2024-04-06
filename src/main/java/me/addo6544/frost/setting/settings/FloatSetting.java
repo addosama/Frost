@@ -1,4 +1,4 @@
-package me.addo6544.frost.module.setting.settings;
+package me.addo6544.frost.setting.settings;
 
 public class FloatSetting extends NumberSetting{
     public FloatSetting(String name, String description, double min, double max, double current, double increasement){

@@ -10,6 +10,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
+
+import me.addo6544.frost.event.Event;
+import me.addo6544.frost.event.events.EventDrawScreen;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.material.Material;
@@ -1387,6 +1390,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                     else
                     {
                         this.mc.currentScreen.drawScreen(j1, k1, p_181560_1_);
+                        new EventDrawScreen(Event.Type.POST, j1, k1, p_181560_1_).call();
                     }
                 }
                 catch (Throwable throwable)

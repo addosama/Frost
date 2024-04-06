@@ -1,4 +1,6 @@
-package me.addo6544.frost.module.setting;
+package me.addo6544.frost.module;
+
+import me.addo6544.frost.setting.SettingBase;
 
 import java.util.ArrayList;
 

@@ -4,7 +4,7 @@ import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventPacketReceive;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
-import me.addo6544.frost.module.setting.settings.IntegerSetting;
+import me.addo6544.frost.setting.settings.IntegerSetting;
 import net.minecraft.network.play.server.S12PacketEntityVelocity;
 
 public class Velocity extends Module {

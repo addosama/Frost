@@ -11,7 +11,9 @@ import me.addo6544.frost.module.ModuleManager;
 import me.addo6544.frost.module.modules.render.TargetHUDMod;
 import me.addo6544.frost.notifications.NotificationManager;
 import me.addo6544.frost.ui.clickgui.classic.ClickGui;
+import me.addo6544.frost.ui.clickgui.fullscreen.FSClickGui;
 import me.addo6544.frost.ui.font.Fonts;
+import me.addo6544.frost.ui.frostinterface.Interface;
 import me.addo6544.frost.ui.hud.target.TargetHUD;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 import org.lwjgl.opengl.Display;
@@ -39,6 +41,8 @@ public enum Frost {
 
     //UI
     public ClickGui CGUI_Classic;
+    public FSClickGui CGUI_FS;
+    public Interface clientInterface;
 
     //Utils
     private Logger logger;
@@ -109,6 +113,8 @@ public enum Frost {
             TargetHUDMod tgHUD = (TargetHUDMod) moduleManager.getModule(TargetHUDMod.class);
             tgHUD.hud = new TargetHUD(5,50);
             CGUI_Classic = new ClickGui();
+            CGUI_FS = new FSClickGui();
+            clientInterface = new Interface();
 
             if (!loaded) code = code+1; else return;
         }

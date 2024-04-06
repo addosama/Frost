@@ -1,14 +1,14 @@
-package me.addo6544.frost.module.setting.settings;
+package me.addo6544.frost.setting.settings;
 
 import me.addo6544.frost.event.Event;
 import me.addo6544.frost.event.events.EventSettingModeChange;
-import me.addo6544.frost.module.setting.Setting;
-import me.addo6544.frost.module.setting.exceptions.InvalidModeException;
+import me.addo6544.frost.setting.Setting;
+import me.addo6544.frost.setting.exceptions.InvalidModeException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModeSetting extends Setting{
+public class ModeSetting extends Setting {
 
     private String currentMode;
     private ArrayList<String> modes;

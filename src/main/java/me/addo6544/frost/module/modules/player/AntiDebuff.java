@@ -4,9 +4,9 @@ import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventUpdate;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
-import me.addo6544.frost.module.setting.SettingGroup;
-import me.addo6544.frost.module.setting.settings.BooleanSetting;
-import me.addo6544.frost.module.setting.settings.ModeSetting;
+import me.addo6544.frost.setting.SettingGroup;
+import me.addo6544.frost.setting.settings.BooleanSetting;
+import me.addo6544.frost.setting.settings.ModeSetting;
 import net.minecraft.potion.PotionEffect;
 
 import java.util.Arrays;

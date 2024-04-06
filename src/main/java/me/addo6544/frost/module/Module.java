@@ -6,17 +6,14 @@ package me.addo6544.frost.module;
 //
 
 import me.addo6544.frost.core.Frost;
-import me.addo6544.frost.module.setting.ModuleSettings;
-import me.addo6544.frost.module.setting.Setting;
-import me.addo6544.frost.module.setting.SettingBase;
-import me.addo6544.frost.module.setting.SettingGroup;
+import me.addo6544.frost.setting.Setting;
+import me.addo6544.frost.setting.SettingBase;
+import me.addo6544.frost.setting.SettingGroup;
 import me.addo6544.frost.ui.notification.Notification;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
-import javax.annotation.Nullable;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 public class Module implements Comparable<Module>{

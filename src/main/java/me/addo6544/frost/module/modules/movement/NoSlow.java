@@ -2,9 +2,9 @@ package me.addo6544.frost.module.modules.movement;
 
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
-import me.addo6544.frost.module.setting.SettingGroup;
-import me.addo6544.frost.module.setting.settings.DoubleSetting;
-import me.addo6544.frost.module.setting.settings.ModeSetting;
+import me.addo6544.frost.setting.SettingGroup;
+import me.addo6544.frost.setting.settings.DoubleSetting;
+import me.addo6544.frost.setting.settings.ModeSetting;
 
 import java.util.Arrays;
 

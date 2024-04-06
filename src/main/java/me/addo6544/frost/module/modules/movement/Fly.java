@@ -1,14 +1,10 @@
 package me.addo6544.frost.module.modules.movement;
 
-import me.addo6544.frost.event.Event;
 import me.addo6544.frost.event.EventTarget;
-import me.addo6544.frost.event.events.EventMotion;
 import me.addo6544.frost.event.events.EventUpdate;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
-import me.addo6544.frost.module.setting.settings.ModeSetting;
-import me.addo6544.frost.utils.ChatHelper;
-import org.lwjgl.input.Keyboard;
+import me.addo6544.frost.setting.settings.ModeSetting;
 
 import java.util.Arrays;
 

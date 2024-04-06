@@ -4,7 +4,7 @@ import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventMotion;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
-import me.addo6544.frost.module.setting.settings.DoubleSetting;
+import me.addo6544.frost.setting.settings.DoubleSetting;
 import me.addo6544.frost.utils.RotationUtil;
 
 public class SpinBot extends Module {

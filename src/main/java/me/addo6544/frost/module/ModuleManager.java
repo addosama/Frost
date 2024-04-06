@@ -21,12 +21,13 @@ import me.addo6544.frost.module.modules.player.AntiDebuff;
 import me.addo6544.frost.module.modules.player.NoFall;
 import me.addo6544.frost.module.modules.render.*;
 import me.addo6544.frost.module.modules.world.AntiBan;
-import me.addo6544.frost.module.setting.SettingBase;
-import me.addo6544.frost.module.setting.SettingGroup;
+import me.addo6544.frost.setting.SettingBase;
+import me.addo6544.frost.setting.SettingGroup;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class ModuleManager {

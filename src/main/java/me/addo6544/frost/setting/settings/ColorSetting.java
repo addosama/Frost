@@ -1,6 +1,6 @@
-package me.addo6544.frost.module.setting.settings;
+package me.addo6544.frost.setting.settings;
 
-import me.addo6544.frost.module.setting.Setting;
+import me.addo6544.frost.setting.Setting;
 
 import java.awt.*;
 

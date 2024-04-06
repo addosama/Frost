@@ -1,9 +1,9 @@
 package me.addo6544.frost.ui.clickgui.classic.component.components.sub;
 
 import me.addo6544.frost.module.Module;
-import me.addo6544.frost.module.setting.Setting;
-import me.addo6544.frost.module.setting.exceptions.InvalidModeException;
-import me.addo6544.frost.module.setting.settings.ModeSetting;
+import me.addo6544.frost.setting.Setting;
+import me.addo6544.frost.setting.exceptions.InvalidModeException;
+import me.addo6544.frost.setting.settings.ModeSetting;
 import me.addo6544.frost.ui.clickgui.classic.component.Component;
 import me.addo6544.frost.ui.clickgui.classic.component.components.Button;
 import me.addo6544.frost.ui.font.Fonts;

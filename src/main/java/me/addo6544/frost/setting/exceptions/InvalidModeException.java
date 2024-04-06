@@ -1,4 +1,4 @@
-package me.addo6544.frost.module.setting.exceptions;
+package me.addo6544.frost.setting.exceptions;
 
 public class InvalidModeException extends Exception{
     public final String mode;

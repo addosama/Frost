@@ -43,6 +43,7 @@ public class RainbowColor {
     }
 
     public void updateRainbowTick(){
+        if (!state) return;
         ++rainbowTick;
         if (rainbowTick > 100) rainbowTick = 0;
     }
@@ -76,5 +77,9 @@ public class RainbowColor {
 
     public boolean isState() {
         return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
     }
 }

@@ -6,7 +6,7 @@ import me.addo6544.frost.event.events.EventSettingModeChange;
 import me.addo6544.frost.event.events.EventUpdate;
 import me.addo6544.frost.module.Category;
 import me.addo6544.frost.module.Module;
-import me.addo6544.frost.module.setting.settings.ModeSetting;
+import me.addo6544.frost.setting.settings.ModeSetting;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 

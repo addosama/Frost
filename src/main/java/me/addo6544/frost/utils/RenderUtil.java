@@ -47,6 +47,23 @@ public class RenderUtil {
         drawRect(left, top, left + width, top + height, color);
     }
 
+    public static void drawImageNoColor(ResourceLocation image, float x, float y, float width, float height, float alpha) {
+        GL11.glPushMatrix();
+        GL11.glDisable(2929);
+        GL11.glEnable(3042);
+        GL11.glDepthMask(false);
+        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        //GL11.glColor4f(1f, 1f, 1f, alpha);
+        mc.getTextureManager().bindTexture(image);
+        Gui.drawModalRectWithCustomSizedTexture((int) x, (int) y, 0.0f, 0.0f, (int) width, (int) height, width, height);
+        GL11.glDepthMask(true);
+        GL11.glDisable(3042);
+        GL11.glEnable(2929);
+        GL11.glPopMatrix();
+
+        //GL11.glColor4f(1f, 1f, 1f, 1f);
+    }
+
     public static void drawImage(ResourceLocation image, float x, float y, float width, float height, float alpha) {
         GL11.glPushMatrix();
         GL11.glDisable(2929);
@@ -175,9 +192,6 @@ public class RenderUtil {
             GL11.glVertex2d(right, bottom);
             GL11.glVertex2d(right, y);
         }));
-
-
-        //GL11.glFlush();
     }
 
     public static void drawOutlinedRect(float x, float y, float width, float height, float lineSize, int lineColor) {
