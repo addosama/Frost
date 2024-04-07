@@ -20,11 +20,15 @@ public class CGuiM extends Module {
 
     @Override
     public void onEnable(){
+        mc.displayGuiScreen(Frost.INSTANCE.CGUI_Classic);
+        /*
         if (mode.getConfigValue().equalsIgnoreCase("Classic")){
             mc.displayGuiScreen(Frost.INSTANCE.CGUI_Classic);
         } else if (mode.getConfigValue().equalsIgnoreCase("FullScreen")){
             mc.displayGuiScreen(Frost.INSTANCE.CGUI_FS);
         }
+        */
         setState(false);
+
     }
 }

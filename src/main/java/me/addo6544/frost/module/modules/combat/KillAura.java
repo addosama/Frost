@@ -34,21 +34,21 @@ public class KillAura extends Module {
             "Random", "Distance"
     ));
 
-    public SettingGroup targetsOption;
+    //Targets Option
     public BooleanSetting targetPlayers = new BooleanSetting("Players", "Target Players", true);
     public BooleanSetting targetAnimals = new BooleanSetting("Animals", "Target Animals", true);
     public BooleanSetting targetMobs = new BooleanSetting("Mobs", "Target Mobs", true);
     public BooleanSetting targetInvisible = new BooleanSetting("Invisible", "Target Invisible", true);
 
-    public SettingGroup rangeOption;
+    //Range Option
     public DoubleSetting minAttackRange = new DoubleSetting("Min Attack Range", "Minimum attack range", 0D,6D,0D);
     public DoubleSetting maxAttackRange = new DoubleSetting("Max Attack Range", "Maxmium attack range", 0D,6D,3D);
     public DoubleSetting swingRange = new DoubleSetting("Swing Range", "Swing item if target in range", 0D,6D,4D);
 
-    public SettingGroup rotationOption;
+    //Rotation Option
     public ModeSetting rotationMode = new ModeSetting("Rotation Mode", "", "Basic",
             Arrays.asList(
-                    "Basic"
+                    "Basic", "None"
             )
             );
     public IntegerSetting rotationBasicHitHeight = new IntegerSetting("Hit Height Percent",
@@ -57,7 +57,8 @@ public class KillAura extends Module {
             );
     //public IntegerSetting playerEyeHeight = new IntegerSetting("Player eyes height", "", 0,100,80);
 
-    public SettingGroup attackOption;
+    //Attack Option
+    public IntegerSetting clickDelay = new IntegerSetting("Click Delay", "", 0, 1000, 100);
     public BooleanSetting checkRotate = new BooleanSetting("Check Rotate", "Check rotate is valid", false);
     public BooleanSetting noSwing = new BooleanSetting("No Swing", "Don't swing item", false);
     public IntegerSetting switchDelay = new IntegerSetting("Switch Delay", "", 50, 1000, 300);
@@ -78,25 +79,21 @@ public class KillAura extends Module {
         switchDelay.addParent(mode.getConfigValue().equals("Switch"));
         rotationBasicHitHeight.addParent(rotationMode.getConfigValue().equalsIgnoreCase("Basic"));
 
-        targetsOption = new SettingGroup("Targets", Arrays.asList(
-                targetPlayers,targetAnimals,targetMobs,targetInvisible
-        ));
-        rangeOption = new SettingGroup("Range Options", Arrays.asList(
-                minAttackRange,maxAttackRange,swingRange
-        ));
-        rotationOption = new SettingGroup("Rotation Options", Arrays.asList(
-                rotationMode, rotationBasicHitHeight //playerEyeHeight
-        ));
-        attackOption = new SettingGroup("Attack Options", Arrays.asList(
-                checkRotate,noSwing,switchDelay
-        ));
 
         this.settings.addSetting(mode);
         this.settings.addSetting(sortMode);
-        this.settings.addSetting(targetsOption);
-        this.settings.addSetting(rangeOption);
-        this.settings.addSetting(rotationOption);
-        this.settings.addSetting(attackOption);
+        this.settings.addSetting(new SettingGroup("Targets", Arrays.asList(
+                targetPlayers,targetAnimals,targetMobs,targetInvisible
+        )));
+        this.settings.addSetting(new SettingGroup("Range Options", Arrays.asList(
+                minAttackRange,maxAttackRange,swingRange
+        )));
+        this.settings.addSetting(new SettingGroup("Rotation Options", Arrays.asList(
+                rotationMode, rotationBasicHitHeight //playerEyeHeight
+        )));
+        this.settings.addSetting(new SettingGroup("Attack Options", Arrays.asList(
+                clickDelay,checkRotate,noSwing,switchDelay
+        )));
     }
 
     @EventTarget
@@ -105,7 +102,7 @@ public class KillAura extends Module {
         if (targets.isEmpty()) return;
         sortTargets();
         if (checkRotate.getConfigValue() && !canAttack()) return;
-        attack();
+        sort();
     }
 
     private float y = 100;
@@ -114,6 +111,7 @@ public class KillAura extends Module {
 
     @EventTarget
     private void rotate(EventMotion e){
+        if (rotationMode.getConfigValue().equalsIgnoreCase("None")) return;
         EntityLivingBase t = targets.get(0);
         float pitch;
         float yaw = EntityUtil.getYawToEntity(mc.thePlayer, t);
@@ -187,32 +185,31 @@ public class KillAura extends Module {
     }
 
     int attacked = 1;
+    static DelayHelper cpsController = new DelayHelper();
 
-    private void attack(){
+    private void attack(EntityLivingBase tg){
+        tghud.getHud().setTarget( tg);
+
+        if (!cpsController.delay()) return;
+        if (mc.thePlayer.getDistanceToEntity(tg) <= swingRange.getConfigValue() && !noSwing.getConfigValue())
+            mc.thePlayer.swingItem();
+        if (mc.thePlayer.getDistanceToEntity(tg) <= maxAttackRange.getConfigValue()) {
+            mc.playerController.attackEntity(mc.thePlayer, tg);
+            if (!noSwing.getConfigValue()) mc.thePlayer.swingItem();
+        }
+        cpsController.reset(clickDelay.getConfigValue());
+    }
+
+    private void sort(){
         if (mode.getConfigValue().equalsIgnoreCase("Multi")) {
             for (EntityLivingBase tg : targets) {
-                if (tg instanceof AbstractClientPlayer)
-                    tghud.getHud().setTarget((AbstractClientPlayer) tg);
-                if (mc.thePlayer.getDistanceToEntity(tg) <= swingRange.getConfigValue() && !noSwing.getConfigValue())
-                    mc.thePlayer.swingItem();
-                if (mc.thePlayer.getDistanceToEntity(tg) <= maxAttackRange.getConfigValue()) {
-                    mc.playerController.attackEntity(mc.thePlayer, tg);
-                    if (!noSwing.getConfigValue()) mc.thePlayer.swingItem();
-                }
+                attack(tg);
             }
         } else if (mode.getConfigValue().equalsIgnoreCase("Single")){
 
             EntityLivingBase tg = targets.get(0);
+            attack(tg);
 
-
-            if (tg instanceof AbstractClientPlayer)
-                tghud.getHud().setTarget((AbstractClientPlayer) tg);
-            if (mc.thePlayer.getDistanceToEntity(tg) <= swingRange.getConfigValue() && !noSwing.getConfigValue())
-                mc.thePlayer.swingItem();
-            if (mc.thePlayer.getDistanceToEntity(tg) <= maxAttackRange.getConfigValue()) {
-                mc.playerController.attackEntity(mc.thePlayer, tg);
-                if (!noSwing.getConfigValue()) mc.thePlayer.swingItem();
-            }
         } else if (mode.getConfigValue().equalsIgnoreCase("Switch")) {
 
             //switch code
@@ -233,14 +230,7 @@ public class KillAura extends Module {
 
             EntityLivingBase tg = targets.get(0);
 
-            if (tg instanceof AbstractClientPlayer)
-                tghud.getHud().setTarget((AbstractClientPlayer) tg);
-            if (mc.thePlayer.getDistanceToEntity(tg) <= swingRange.getConfigValue() && !noSwing.getConfigValue())
-                mc.thePlayer.swingItem();
-            if (mc.thePlayer.getDistanceToEntity(tg) <= maxAttackRange.getConfigValue()) {
-                mc.playerController.attackEntity(mc.thePlayer, tg);
-                if (!noSwing.getConfigValue()) mc.thePlayer.swingItem();
-            }
+            attack(tg);
         }
     }
 
@@ -250,6 +240,7 @@ public class KillAura extends Module {
         targets.clear();
         tghud.getHud().setTarget(null);
         tghud.getHud().setVisible(true);
+        cpsController.reset(0);
     }
 
     @Override
@@ -257,5 +248,6 @@ public class KillAura extends Module {
         targets.clear();
         tghud.getHud().setVisible(false);
         tghud.getHud().setTarget(null);
+        cpsController.reset(0);
     }
 }

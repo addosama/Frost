@@ -35,8 +35,6 @@ public class WaterMark extends InterfaceWidget {
         this.settings.addSetting(mode);
         this.settings.addSetting(radiusFloat);
         this.settings.addSetting(rainbow);
-
-        this.setState(true);
     }
 
     @Override

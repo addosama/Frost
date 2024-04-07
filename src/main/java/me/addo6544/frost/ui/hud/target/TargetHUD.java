@@ -9,6 +9,7 @@ import me.addo6544.frost.utils.RoundedUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.entity.EntityLivingBase;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -23,7 +24,7 @@ public class TargetHUD {
     private final FR b24 = Fonts.HMBold24;
     private final FR r12 = Fonts.HMRegular12;
 
-    public AbstractClientPlayer target;
+    public EntityLivingBase targetE;
 
     public boolean visible;
 
@@ -35,8 +36,8 @@ public class TargetHUD {
         mc = Minecraft.getMinecraft();
     }
 
-    public void setTarget(AbstractClientPlayer e){
-        this.target = e;
+    public void setTarget(EntityLivingBase e){
+        this.targetE = e;
     }
 
     public void setVisible(boolean b){
@@ -45,14 +46,16 @@ public class TargetHUD {
     }
 
     public void render(){
-        if (!visible || target == null) return;
-        String s1 = target.getName();
-        String s2 = (int)target.getHealth() + "HP | Distance:" + new DecimalFormat("0.00").format(mc.thePlayer.getDistanceToEntity(target));
-        String text = b24.getStringWidth(s1) >= r12.getStringWidth(s2) ? s1 : s2;
+        if (!visible || targetE == null) return;
+        String s1 = targetE.getName();
+        String s2 = (int)targetE.getHealth() + "HP | Distance:" + new DecimalFormat("0.00").format(mc.thePlayer.getDistanceToEntity(targetE));
+        float text = Math.max(b24.getStringWidth(s1), r12.getStringWidth(s2));
+
+        float f = targetE instanceof AbstractClientPlayer ? 40 : 0;
 
         RoundedUtil.drawRound(
                 x,y,
-                5 + 40 + 10 + b24.getStringWidth(text) + 10,
+                5 + f + 10 + text + 10,
                 height,
                 8,
                 new Color(0,0,0, 191)
@@ -64,19 +67,23 @@ public class TargetHUD {
                 new Color(0,0,0,128)
         );
          */
-        GLUtil.startBlend();
-        mc.getTextureManager().bindTexture(target.getLocationSkin());
-        Gui.drawScaledCustomSizeModalRect(
-                (int) (x+5), (int) (y+5),
-                8,8,8,8,40,40,64F,64F
-        );
-        GLUtil.endBlend();
+        if (f == 40){
+            AbstractClientPlayer target = (AbstractClientPlayer) targetE;
+            GLUtil.startBlend();
+            mc.getTextureManager().bindTexture(target.getLocationSkin());
+            Gui.drawScaledCustomSizeModalRect(
+                    (int) (x+5), (int) (y+5),
+                    8,8,8,8,40,40,64F,64F
+            );
+            GLUtil.endBlend();
+        }
 
-        b24.drawString(s1, x+55,y+10,-1);
-        r12.drawString(s2, x+55,y+10+b24.FONT_HEIGHT+2, -1);
-        float bW = b24.getStringWidth(s1) * (target.getHealth()/target.getMaxHealth());
+
+        b24.drawString(s1, x+15+f,y+10,-1);
+        r12.drawString(s2, x+15+f,y+10+b24.FONT_HEIGHT+2, -1);
+        float bW = text * (targetE.getHealth()/targetE.getMaxHealth());
         RoundedUtil.drawGradientVertical(
-                x+55,y+10+b24.FONT_HEIGHT+2+r12.FONT_HEIGHT+2,
+                x+15+f,y+10+b24.FONT_HEIGHT+2+r12.FONT_HEIGHT+2,
                 bW,5,
                 2.5F,
                 new Color(127, 127, 255),
