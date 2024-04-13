@@ -6,6 +6,7 @@ import me.addo6544.frost.event.EventTarget;
 import me.addo6544.frost.event.events.EventDrawScreen;
 import me.addo6544.frost.event.events.EventRender2D;
 import me.addo6544.frost.ui.frostinterface.widgets.InterfaceWidget;
+import me.addo6544.frost.ui.frostinterface.widgets.impl.Arraylist;
 import me.addo6544.frost.ui.frostinterface.widgets.impl.WaterMark;
 
 import java.util.Arrays;
@@ -14,7 +15,7 @@ import java.util.List;
 public class Interface {
     private boolean state = false;
     private final List<InterfaceWidget> widgets = Arrays.asList(
-            new WaterMark()
+            new WaterMark(),new Arraylist()
     );
     private InterfaceSettings settings;
 

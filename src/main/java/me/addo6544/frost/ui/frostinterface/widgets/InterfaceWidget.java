@@ -23,6 +23,16 @@ public abstract class InterfaceWidget {
         this.state = false;
     }
 
+    public InterfaceWidget(String name, String description, float x, float y, boolean inGameWidget){
+        this.x = x;
+        this.y = y;
+        this.width = 0;
+        this.height = 0;
+        this.inGameWidget = inGameWidget;
+        this.settings = new InterfaceSettings(false);
+        this.state = false;
+    }
+
     public boolean isHovering(float mouseX, float mouseY){
         return
                 mouseX >= x && mouseX <= x+width &&

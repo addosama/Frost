@@ -1,8 +1,8 @@
 package me.addo6544.frost.core;
 
 public enum ReleaseType {
-    Release("Release"),
-    Beta("Beta"),
+    Stable("Stable Build"),
+    Experimental("Experimental Build"),
     Development("Development Build"),
     ;
 

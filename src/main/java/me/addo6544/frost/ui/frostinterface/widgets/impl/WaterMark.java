@@ -29,7 +29,7 @@ public class WaterMark extends InterfaceWidget {
 
     private final RainbowColor color = new RainbowColor();
     public WaterMark() {
-        super("Watermark", "Client watermark", 5, 5, 0, 30, true);
+        super("Watermark", "Client watermark", 5, 5,true);
         radiusFloat.addParent(mode.getConfigValue().equalsIgnoreCase("Frost"));
 
         this.settings.addSetting(mode);

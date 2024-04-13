@@ -5,11 +5,9 @@ import me.addo6544.frost.utils.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.io.IOException;
-import java.nio.DoubleBuffer;
 import java.util.ArrayList;
 
 public class WindowClickGui extends GuiScreen {
