@@ -2,6 +2,10 @@ package net.minecraft.client.entity;
 
 import com.mojang.authlib.GameProfile;
 import java.io.File;
+
+import me.addo6544.frost.core.Frost;
+import me.addo6544.frost.event.events.EventGetPlayerCape;
+import me.addo6544.frost.module.modules.render.Cape;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.ImageBufferDownload;
@@ -90,10 +94,18 @@ public abstract class AbstractClientPlayer extends EntityPlayer
 
     public ResourceLocation getLocationCape()
     {
+
         if (!Config.isShowCapes())
         {
             return null;
         }
+
+
+        EventGetPlayerCape e = new EventGetPlayerCape();
+        e.call();
+        if (e.getR() != null) return e.getR();
+
+
         else if (this.locationOfCape != null)
         {
             return this.locationOfCape;

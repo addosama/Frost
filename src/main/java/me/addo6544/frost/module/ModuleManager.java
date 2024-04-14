@@ -19,6 +19,7 @@ import me.addo6544.frost.module.modules.player.AntiDebuff;
 import me.addo6544.frost.module.modules.player.NoFall;
 import me.addo6544.frost.module.modules.render.*;
 import me.addo6544.frost.module.modules.world.AntiBan;
+import me.addo6544.frost.module.modules.world.FastPlace;
 import me.addo6544.frost.setting.SettingBase;
 import me.addo6544.frost.setting.SettingGroup;
 import me.addo6544.frost.utils.SimpleConsoleFormatter;
@@ -55,6 +56,8 @@ public class ModuleManager {
         this.addModule(new Speed(), false);
         this.addModule(new NoFall(), false);
         this.addModule(new KillAura(), false);
+        this.addModule(new Cape(), false);
+        this.addModule(new FastPlace(), false);
         this.addModule(new KeepSprint(), false);
         this.addModule(new Crit(), false);
 
