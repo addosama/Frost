@@ -26,7 +26,7 @@ public enum Frost {
 
     //Client Info
     public static final String CLIENT_NAME = "Frost";
-    public static final float CLIENT_VERSION = 1.8F;
+    public static final float CLIENT_VERSION = 1.81F;
     public static final String CLIENT_PATH = System.getProperty("user.dir") + "\\frost";
     public static final String CLIENT_WEBSITE = "frost.addo6544.me";
     public static final ReleaseType RELEASE_TYPE = ReleaseType.Development;
