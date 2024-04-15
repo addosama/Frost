@@ -14,7 +14,7 @@ public class Cape extends Module {
     public ModeSetting mode = new ModeSetting("Mode", "Cape Styles",
             "Frost",
             Arrays.asList(
-                    "Frost", "Frost Dark"
+                    "Frost", "Frost Dark", "Addo", "Addo Dark"
             ));
     public Cape(){
         super("Cape", "", Category.Render);
